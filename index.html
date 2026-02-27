@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AWESOME SAUCE Inc. — Creative Synergy, One Drop at a Time.</title>
-  <meta name="description" content="AWESOME SAUCE Inc. — A creative agency in Shibuya, Tokyo. Advertising, digital marketing, and content production.">
+  <title>AWESOME SAUCE Inc. — Global Creative Agency</title>
+  <meta name="description" content="AWESOME SAUCE Inc. — A global creative agency based in Shibuya, Tokyo. Strategy, creative production, and digital innovation.">
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,15 +17,17 @@
     :root {
       --green:       #3EB370;
       --blue:        #1A96D5;
+      --green-light: #e8f7ef;
+      --blue-light:  #e3f1fa;
       --green-dark:  #2d9459;
       --blue-dark:   #1278aa;
-      --ink:         #0d0d0d;
-      --ink-mid:     #333333;
+      --ink:         #1a1a1a;
+      --ink-mid:     #444444;
       --ink-light:   #777777;
       --ink-faint:   #b0b0b0;
-      --surface:     #f5f5f3;
+      --surface:     #f7f8f6;
       --white:       #ffffff;
-      --border:      #e2e2e0;
+      --border:      #e8e8e6;
 
       --font-body:   'Inter', system-ui, sans-serif;
       --font-display:'Space Grotesk', system-ui, sans-serif;
@@ -57,8 +59,7 @@
     img { display: block; max-width: 100%; }
 
     /* =====================================================
-       SCROLL FADE-IN (CSS only, IntersectionObserver-free)
-       Using animation-timeline where supported; fallback = visible
+       SCROLL FADE-IN
     ===================================================== */
     @supports (animation-timeline: scroll()) {
       .reveal {
@@ -71,6 +72,34 @@
     }
     @keyframes fadeUp {
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =====================================================
+       LANGUAGE TOGGLE
+    ===================================================== */
+    [lang="en"] .ja-only { display: none !important; }
+    [lang="ja"] .en-only { display: none !important; }
+
+    .lang-switch {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.4rem 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .lang-switch:hover {
+      border-color: var(--green);
+      color: var(--green);
     }
 
     /* =====================================================
@@ -104,7 +133,7 @@
     .site-nav {
       display: flex;
       align-items: center;
-      gap: 2.5rem;
+      gap: 2rem;
     }
     .site-nav a {
       font-family: var(--font-display);
@@ -153,7 +182,7 @@
     }
 
     /* =====================================================
-       HERO
+       HERO — LIGHT with animated gradient (pagedrop-inspired)
     ===================================================== */
     .hero {
       min-height: 100svh;
@@ -165,37 +194,65 @@
       padding: 8rem 2rem 6rem;
       position: relative;
       overflow: hidden;
-      background: var(--ink);
+      background: var(--white);
     }
 
-    /* animated gradient orbs */
-    .hero::before,
-    .hero::after {
-      content: '';
+    /* Animated gradient background — pagedrop.jp inspired */
+    .hero-gradient {
+      position: absolute;
+      inset: 0;
+      opacity: 0.18;
+      background: linear-gradient(135deg,
+        #3EB370 0%,
+        #1A96D5 25%,
+        #a5d509 50%,
+        #3EB370 75%,
+        #1A96D5 100%
+      );
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Soft luminous orbs */
+    .hero-orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.55;
-      animation: orb 14s var(--ease-in-out) infinite alternate;
+      filter: blur(100px);
+      opacity: 0.15;
+      animation: orbFloat 14s var(--ease-in-out) infinite alternate;
     }
-    .hero::before {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, var(--green) 0%, transparent 70%);
-      top: -10%; left: -10%;
-      animation-duration: 14s;
-    }
-    .hero::after {
+    .hero-orb-1 {
       width: 500px; height: 500px;
-      background: radial-gradient(circle, var(--blue) 0%, transparent 70%);
-      bottom: -10%; right: -10%;
-      animation-duration: 18s;
+      background: var(--green);
+      top: -15%; left: -5%;
+      animation-duration: 16s;
+    }
+    .hero-orb-2 {
+      width: 400px; height: 400px;
+      background: var(--blue);
+      bottom: -10%; right: -5%;
+      animation-duration: 20s;
       animation-direction: alternate-reverse;
     }
+    .hero-orb-3 {
+      width: 300px; height: 300px;
+      background: #a5d509;
+      top: 40%; left: 60%;
+      animation-duration: 18s;
+      animation-delay: -5s;
+    }
 
-    @keyframes orb {
+    @keyframes orbFloat {
       0%   { transform: translate(0, 0) scale(1); }
-      50%  { transform: translate(60px, 40px) scale(1.1); }
-      100% { transform: translate(-30px, 60px) scale(0.95); }
+      33%  { transform: translate(40px, -30px) scale(1.05); }
+      66%  { transform: translate(-20px, 40px) scale(0.95); }
+      100% { transform: translate(30px, 20px) scale(1.02); }
     }
 
     .hero-inner {
@@ -233,7 +290,7 @@
       font-weight: 700;
       line-height: 1.0;
       letter-spacing: -0.03em;
-      color: var(--white);
+      color: var(--ink);
       margin-bottom: 2rem;
       opacity: 0;
       animation: fadeUp 0.8s 0.4s var(--ease-out) forwards;
@@ -249,7 +306,7 @@
     .hero-sub {
       font-size: clamp(1rem, 2vw, 1.2rem);
       font-weight: 300;
-      color: rgba(255,255,255,0.55);
+      color: var(--ink-light);
       max-width: 520px;
       margin: 0 auto 3rem;
       opacity: 0;
@@ -275,11 +332,11 @@
       background: linear-gradient(135deg, var(--green), var(--blue));
       color: var(--white);
       transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 8px 32px rgba(62,179,112,0.35);
+      box-shadow: 0 8px 32px rgba(62,179,112,0.25);
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(62,179,112,0.45);
+      box-shadow: 0 14px 40px rgba(62,179,112,0.35);
     }
 
     .btn-ghost {
@@ -289,13 +346,13 @@
       letter-spacing: 0.04em;
       padding: 0.9rem 2.2rem;
       border-radius: 100px;
-      border: 1px solid rgba(255,255,255,0.25);
-      color: rgba(255,255,255,0.8);
+      border: 1px solid var(--border);
+      color: var(--ink-mid);
       transition: border-color 0.2s, color 0.2s;
     }
     .btn-ghost:hover {
-      border-color: rgba(255,255,255,0.7);
-      color: var(--white);
+      border-color: var(--green);
+      color: var(--green);
     }
 
     /* scroll indicator */
@@ -315,13 +372,13 @@
       font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: var(--ink-faint);
       font-family: var(--font-display);
     }
     .scroll-hint-line {
       width: 1px;
       height: 40px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+      background: linear-gradient(to bottom, var(--ink-faint), transparent);
       animation: scrollLine 2s ease-in-out infinite;
     }
     @keyframes scrollLine {
@@ -373,8 +430,6 @@
       align-items: center;
     }
 
-    .about-left {}
-
     .about-body {
       margin-top: 2rem;
       font-size: 1.05rem;
@@ -413,12 +468,13 @@
       position: relative;
     }
     .about-card {
-      background: var(--ink);
+      background: linear-gradient(135deg, var(--green-light), var(--blue-light));
       border-radius: var(--radius-lg);
       padding: 3rem;
-      color: var(--white);
+      color: var(--ink);
       position: relative;
       overflow: hidden;
+      border: 1px solid var(--border);
     }
     .about-card::before {
       content: '';
@@ -426,7 +482,7 @@
       width: 280px; height: 280px;
       border-radius: 50%;
       background: radial-gradient(circle, var(--green) 0%, transparent 70%);
-      opacity: 0.3;
+      opacity: 0.1;
       top: -80px; right: -80px;
       filter: blur(40px);
     }
@@ -446,10 +502,11 @@
       line-height: 1.25;
       margin-bottom: 1rem;
       letter-spacing: -0.02em;
+      color: var(--ink);
     }
     .about-card-body {
       font-size: 0.92rem;
-      color: rgba(255,255,255,0.6);
+      color: var(--ink-light);
       line-height: 1.75;
     }
     .about-card-pill {
@@ -457,12 +514,12 @@
       align-items: center;
       gap: 0.5rem;
       margin-top: 2rem;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(62,179,112,0.08);
+      border: 1px solid rgba(62,179,112,0.2);
       border-radius: 100px;
       padding: 0.5rem 1rem;
       font-size: 0.78rem;
-      color: rgba(255,255,255,0.7);
+      color: var(--green-dark);
       font-family: var(--font-display);
       letter-spacing: 0.04em;
     }
@@ -518,7 +575,7 @@
     }
     .service-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.09);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.07);
       border-color: rgba(62,179,112,0.3);
     }
     .service-card:hover::before { opacity: 1; }
@@ -534,7 +591,7 @@
     }
     .icon-green { background: rgba(62,179,112,0.12); }
     .icon-blue  { background: rgba(26,150,213,0.12); }
-    .icon-mix   { background: linear-gradient(135deg, rgba(62,179,112,0.15), rgba(26,150,213,0.15)); }
+    .icon-mix   { background: linear-gradient(135deg, rgba(62,179,112,0.12), rgba(26,150,213,0.12)); }
 
     .service-number {
       font-family: var(--font-display);
@@ -579,10 +636,75 @@
     }
 
     /* =====================================================
+       WORK / VIMEO
+    ===================================================== */
+    .work-wrap {
+      background: var(--white);
+    }
+
+    .work-header {
+      margin-bottom: 3rem;
+    }
+
+    .vimeo-showcase {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .vimeo-embed {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+    .vimeo-embed iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .vimeo-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .vimeo-link {
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink-mid);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.8rem 2rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      transition: all 0.2s;
+    }
+    .vimeo-link:hover {
+      border-color: var(--green);
+      color: var(--green);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(62,179,112,0.12);
+    }
+    .vimeo-link svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* =====================================================
        COMPANY
     ===================================================== */
     .company-wrap {
-      background: var(--white);
+      background: var(--surface);
     }
 
     .company-layout {
@@ -593,7 +715,6 @@
       margin-top: 3rem;
     }
 
-    .company-left {}
     .company-intro {
       font-size: 0.95rem;
       color: var(--ink-light);
@@ -606,6 +727,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       overflow: hidden;
+      background: var(--white);
     }
     .company-row {
       display: grid;
@@ -641,26 +763,19 @@
     }
 
     /* =====================================================
-       SECURITY POLICY
+       SECURITY POLICY — Light card style
     ===================================================== */
     .security-wrap {
-      background: var(--ink);
-      color: var(--white);
+      background: var(--white);
     }
 
     .security-header {
       margin-bottom: 3rem;
     }
-    .security-header .section-label {
-      color: var(--green);
-    }
-    .security-header .section-title {
-      color: var(--white);
-    }
 
     .policy-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(135deg, rgba(62,179,112,0.04) 0%, rgba(26,150,213,0.04) 100%);
+      border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 3.5rem 4rem;
       position: relative;
@@ -672,7 +787,7 @@
       width: 400px; height: 400px;
       border-radius: 50%;
       background: radial-gradient(circle, var(--blue) 0%, transparent 70%);
-      opacity: 0.08;
+      opacity: 0.04;
       bottom: -150px; right: -100px;
       filter: blur(60px);
       pointer-events: none;
@@ -682,7 +797,7 @@
       font-family: var(--font-display);
       font-size: 1.35rem;
       font-weight: 700;
-      color: var(--white);
+      color: var(--ink);
       text-align: center;
       margin-bottom: 2rem;
       letter-spacing: -0.01em;
@@ -690,12 +805,12 @@
 
     .policy-intro {
       font-size: 0.95rem;
-      color: rgba(255,255,255,0.65);
+      color: var(--ink-light);
       line-height: 1.85;
       text-align: left;
       margin-bottom: 2.5rem;
       padding-bottom: 2.5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid var(--border);
     }
 
     .policy-items {
@@ -713,8 +828,8 @@
     .policy-item-num {
       width: 48px; height: 48px;
       border-radius: var(--radius-sm);
-      background: linear-gradient(135deg, rgba(62,179,112,0.2), rgba(26,150,213,0.2));
-      border: 1px solid rgba(62,179,112,0.25);
+      background: linear-gradient(135deg, rgba(62,179,112,0.12), rgba(26,150,213,0.12));
+      border: 1px solid rgba(62,179,112,0.15);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -724,24 +839,23 @@
       color: var(--green);
       flex-shrink: 0;
     }
-    .policy-item-content {}
     .policy-item-title {
       font-family: var(--font-display);
       font-size: 0.95rem;
       font-weight: 600;
-      color: var(--white);
+      color: var(--ink);
       margin-bottom: 0.35rem;
     }
     .policy-item-body {
       font-size: 0.9rem;
-      color: rgba(255,255,255,0.55);
+      color: var(--ink-light);
       line-height: 1.8;
     }
 
     .policy-meta {
       margin-top: 3rem;
       padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid var(--border);
       display: flex;
       justify-content: flex-end;
       align-items: flex-end;
@@ -751,22 +865,23 @@
     }
     .policy-meta-date {
       font-size: 0.82rem;
-      color: rgba(255,255,255,0.35);
+      color: var(--ink-faint);
       font-family: var(--font-display);
       letter-spacing: 0.04em;
     }
     .policy-meta-name {
       font-size: 0.88rem;
-      color: rgba(255,255,255,0.6);
+      color: var(--ink-mid);
     }
 
     /* =====================================================
-       FOOTER
+       FOOTER — Light
     ===================================================== */
     .site-footer {
-      background: #080808;
-      color: rgba(255,255,255,0.4);
-      padding: 3rem 3rem;
+      background: var(--surface);
+      color: var(--ink-light);
+      padding: 3rem;
+      border-top: 1px solid var(--border);
     }
     .footer-inner {
       max-width: 1060px;
@@ -785,8 +900,7 @@
     .footer-logo img {
       height: 28px;
       width: auto;
-      opacity: 0.55;
-      filter: grayscale(1);
+      opacity: 0.7;
     }
     .footer-brand {
       font-family: var(--font-display);
@@ -794,7 +908,7 @@
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
+      color: var(--ink-faint);
     }
     .footer-links {
       display: flex;
@@ -805,13 +919,24 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
       font-family: var(--font-display);
-      color: rgba(255,255,255,0.3);
+      color: var(--ink-faint);
       transition: color 0.2s;
     }
-    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+    .footer-links a:hover { color: var(--green); }
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .footer-social a {
+      color: var(--ink-faint);
+      transition: color 0.2s;
+      display: flex;
+    }
+    .footer-social a:hover { color: var(--green); }
     .footer-copy {
       font-size: 0.78rem;
-      color: rgba(255,255,255,0.2);
+      color: var(--ink-faint);
       font-family: var(--font-display);
       letter-spacing: 0.04em;
     }
@@ -872,9 +997,13 @@
     <nav class="site-nav">
       <a href="#about">About</a>
       <a href="#services">Services</a>
+      <a href="#work">Work</a>
       <a href="#company">Company</a>
       <a href="#security">Security</a>
-      <a href="#security" class="nav-cta">Info Security</a>
+      <button class="lang-switch" onclick="toggleLang()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span id="lang-label">JA</span>
+      </button>
     </nav>
     <button class="hamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
@@ -883,21 +1012,39 @@
 
 
   <!-- ===================================================
-       HERO
+       HERO — Light + animated gradient
   =================================================== -->
   <section class="hero">
+    <div class="hero-gradient"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+
     <div class="hero-inner">
-      <p class="hero-eyebrow">Shibuya, Tokyo &mdash; Est. 2019</p>
-      <h1 class="hero-title">
+      <p class="hero-eyebrow en-only">Global Creative Agency &mdash; Shibuya, Tokyo</p>
+      <p class="hero-eyebrow ja-only">グローバル・クリエイティブエージェンシー &mdash; 渋谷, 東京</p>
+
+      <h1 class="hero-title en-only">
         Creative <span class="accent">Synergy,</span><br>
         One Drop<br>at a Time.
       </h1>
-      <p class="hero-sub">
-        A boutique creative agency crafting bold ideas and digital strategies for brands that dare to move first.
+      <h1 class="hero-title ja-only">
+        <span class="accent">一滴</span>が、<br>
+        すべてを<br>変える。
+      </h1>
+
+      <p class="hero-sub en-only">
+        A global creative agency crafting bold ideas and digital strategies for brands that dare to move first.
       </p>
+      <p class="hero-sub ja-only">
+        先駆けるブランドのために、大胆なアイデアとデジタル戦略を。渋谷から世界へ。
+      </p>
+
       <div class="hero-actions">
-        <a href="#services" class="btn-primary">Explore Our Work</a>
-        <a href="#company" class="btn-ghost">Who We Are</a>
+        <a href="#work" class="btn-primary en-only">Explore Our Work</a>
+        <a href="#work" class="btn-primary ja-only">実績を見る</a>
+        <a href="#about" class="btn-ghost en-only">Who We Are</a>
+        <a href="#about" class="btn-ghost ja-only">私たちについて</a>
       </div>
     </div>
     <div class="scroll-hint">
@@ -916,13 +1063,23 @@
 
         <div class="about-left reveal">
           <p class="section-label">About</p>
-          <h2 class="section-title">Where a single drop<br>changes everything.</h2>
-          <p class="about-body">
-            AWESOME SAUCE Inc. is an independent creative agency based in Shibuya, Tokyo. We partner with brands to build campaigns that resonate — blending sharp strategy, fearless creative, and precise digital execution.
+          <h2 class="section-title en-only">Where a single drop<br>changes everything.</h2>
+          <h2 class="section-title ja-only">一滴が、<br>すべてを変える。</h2>
+
+          <p class="about-body en-only">
+            AWESOME SAUCE Inc. is an independent global creative agency based in Shibuya, Tokyo. We partner with brands to build campaigns that resonate — blending sharp strategy, fearless creative, and precise digital execution.
           </p>
-          <p class="about-body" style="margin-top:1rem;">
+          <p class="about-body en-only" style="margin-top:1rem;">
             Our name says it all: the right idea, like the right sauce, elevates everything around it.
           </p>
+
+          <p class="about-body ja-only">
+            AWESOME SAUCE Inc.は、東京・渋谷を拠点とするグローバル・クリエイティブエージェンシーです。鋭い戦略、大胆なクリエイティブ、精緻なデジタル施策を融合し、ブランドと共に心に響くキャンペーンを創造します。
+          </p>
+          <p class="about-body ja-only" style="margin-top:1rem;">
+            適切なアイデアは、適切なソースのように、周囲のすべてを引き立てます。
+          </p>
+
           <div class="about-stat-row">
             <div class="stat">
               <span class="stat-number">2019</span>
@@ -933,7 +1090,7 @@
               <span class="stat-label">Home Base</span>
             </div>
             <div class="stat">
-              <span class="stat-number">∞</span>
+              <span class="stat-number">&infin;</span>
               <span class="stat-label">Ideas</span>
             </div>
           </div>
@@ -941,14 +1098,25 @@
 
         <div class="about-right reveal">
           <div class="about-card">
-            <p class="about-card-tag">Our Philosophy</p>
-            <h3 class="about-card-title">The A+雫 Principle</h3>
-            <p class="about-card-body">
-              The droplet (雫) in our logo is not decoration — it is intent. One concentrated idea, perfectly applied, can redefine a brand. We don't overwhelm; we distill. Every project begins with finding that single, potent drop.
+            <p class="about-card-tag en-only">Our Philosophy</p>
+            <p class="about-card-tag ja-only">フィロソフィー</p>
+
+            <h3 class="about-card-title">The A+&#38627; Principle</h3>
+
+            <p class="about-card-body en-only">
+              The droplet (&#38627;) in our logo is not decoration — it is intent. One concentrated idea, perfectly applied, can redefine a brand. We don't overwhelm; we distill. Every project begins with finding that single, potent drop.
             </p>
-            <span class="about-card-pill">
+            <p class="about-card-body ja-only">
+              ロゴに込められた雫は、装飾ではなく、意志。一滴の凝縮されたアイデアを的確に注げば、ブランドは生まれ変わります。圧倒するのではなく、蒸留する。全てのプロジェクトは、その一滴を見つけることから始まります。
+            </p>
+
+            <span class="about-card-pill en-only">
               <span class="about-card-pill-dot"></span>
               Currently accepting new projects
+            </span>
+            <span class="about-card-pill ja-only">
+              <span class="about-card-pill-dot"></span>
+              新規プロジェクト受付中
             </span>
           </div>
         </div>
@@ -967,7 +1135,8 @@
       <div class="services-header">
         <div class="reveal">
           <p class="section-label">Services</p>
-          <h2 class="section-title">What we do<br>exceptionally well.</h2>
+          <h2 class="section-title en-only">What we do<br>exceptionally well.</h2>
+          <h2 class="section-title ja-only">私たちの<br>得意分野。</h2>
         </div>
       </div>
 
@@ -978,9 +1147,13 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3EB370" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           </div>
           <p class="service-number">01</p>
-          <h3 class="service-title">Advertising &amp; Creative</h3>
-          <p class="service-desc">
+          <h3 class="service-title en-only">Creative &amp; Strategy</h3>
+          <h3 class="service-title ja-only">クリエイティブ &amp; 戦略</h3>
+          <p class="service-desc en-only">
             From brand strategy to campaign execution — we craft narratives that cut through noise and stick in memory. Concept, copy, design, production: end to end.
+          </p>
+          <p class="service-desc ja-only">
+            ブランド戦略からキャンペーン実行まで — ノイズを切り裂き記憶に残るナラティブを構築。コンセプトからコピー、デザイン、制作までエンドツーエンドで対応。
           </p>
           <div class="service-tag-row">
             <span class="tag">Brand Strategy</span>
@@ -994,9 +1167,13 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A96D5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           </div>
           <p class="service-number">02</p>
-          <h3 class="service-title">Digital Marketing</h3>
-          <p class="service-desc">
+          <h3 class="service-title en-only">Digital Marketing</h3>
+          <h3 class="service-title ja-only">デジタルマーケティング</h3>
+          <p class="service-desc en-only">
             Data-informed, human-centred. We build and manage digital ecosystems — paid media, SEO, social, analytics — that grow audiences and convert intent into action.
+          </p>
+          <p class="service-desc ja-only">
+            データ駆動、ヒューマンセンタード。ペイドメディア、SEO、ソーシャル、アナリティクスを統合し、オーディエンスを育て、意図をアクションへ転換。
           </p>
           <div class="service-tag-row">
             <span class="tag">Paid Media</span>
@@ -1010,9 +1187,13 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3EB370" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
           <p class="service-number">03</p>
-          <h3 class="service-title">Content Production</h3>
-          <p class="service-desc">
+          <h3 class="service-title en-only">Content Production</h3>
+          <h3 class="service-title ja-only">コンテンツ制作</h3>
+          <p class="service-desc en-only">
             Video, photography, editorial and interactive — we produce content that earns attention. With a network of Tokyo and international talent, we deliver at every scale.
+          </p>
+          <p class="service-desc ja-only">
+            映像、写真、エディトリアル、インタラクティブ — 注目を集めるコンテンツを制作。東京と世界のタレントネットワークで、あらゆるスケールに対応。
           </p>
           <div class="service-tag-row">
             <span class="tag">Video</span>
@@ -1028,18 +1209,57 @@
   <div class="divider-line"></div>
 
   <!-- ===================================================
+       WORK / VIMEO PORTFOLIO
+  =================================================== -->
+  <section id="work" class="section-wrap work-wrap">
+    <div class="section-inner">
+      <div class="work-header reveal">
+        <p class="section-label">Work</p>
+        <h2 class="section-title en-only">Selected work &amp;<br>creative showcase.</h2>
+        <h2 class="section-title ja-only">制作実績</h2>
+      </div>
+
+      <div class="vimeo-showcase reveal">
+        <div class="vimeo-embed">
+          <iframe
+            src="https://player.vimeo.com/video/awesomesauceinc?background=1&autoplay=0&title=0&byline=0&portrait=0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+            title="AWESOME SAUCE Inc. Portfolio"
+          ></iframe>
+        </div>
+      </div>
+
+      <div class="vimeo-cta reveal">
+        <a href="https://vimeo.com/awesomesauceinc" target="_blank" rel="noopener" class="vimeo-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.977 6.416c-.105 2.338-1.739 5.543-4.894 9.609-3.268 4.247-6.026 6.37-8.29 6.37-1.409 0-2.578-1.294-3.553-3.881L5.322 11.4C4.603 8.816 3.834 7.522 3.01 7.522c-.179 0-.806.378-1.881 1.132L0 7.197a315 315 0 0 0 3.501-3.123C5.08 2.701 6.266 1.984 7.055 1.91c1.867-.18 3.016 1.1 3.447 3.838.465 2.953.789 4.789.971 5.507.539 2.45 1.131 3.674 1.776 3.674.502 0 1.256-.796 2.265-2.385 1.004-1.589 1.54-2.797 1.612-3.628.144-1.371-.395-2.061-1.614-2.061-.574 0-1.167.121-1.777.391 1.186-3.868 3.434-5.757 6.762-5.637 2.473.06 3.628 1.664 3.493 4.797l-.013.01z"/></svg>
+          <span class="en-only">View Full Portfolio on Vimeo</span>
+          <span class="ja-only">Vimeoでポートフォリオを見る</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-line"></div>
+
+  <!-- ===================================================
        COMPANY
   =================================================== -->
   <section id="company" class="section-wrap company-wrap">
     <div class="section-inner">
       <p class="section-label reveal">Company</p>
-      <h2 class="section-title reveal">The people &amp;<br>the principles.</h2>
+      <h2 class="section-title reveal en-only">The people &amp;<br>the principles.</h2>
+      <h2 class="section-title reveal ja-only">会社概要</h2>
 
       <div class="company-layout">
 
         <div class="company-left reveal">
-          <p class="company-intro">
-            AWESOME SAUCE Inc. is a registered Japanese corporation (合同会社) headquartered in Shibuya, Tokyo — one of the world's most vibrant creative districts. We operate with the agility of a boutique and the rigour of a global shop.
+          <p class="company-intro en-only">
+            AWESOME SAUCE Inc. is headquartered in Shibuya, Tokyo — one of the world's most vibrant creative districts. We operate with the agility of a boutique and the ambition of a global agency.
+          </p>
+          <p class="company-intro ja-only">
+            AWESOME SAUCE Inc.は、世界で最も活気あるクリエイティブ地区のひとつ、東京・渋谷に本社を構えています。ブティックの機動力とグローバルエージェンシーの志を併せ持ちます。
           </p>
         </div>
 
@@ -1050,7 +1270,7 @@
               <div class="company-val">AWESOME SAUCE Inc.</div>
             </div>
             <div class="company-row">
-              <div class="company-key">Representative</div>
+              <div class="company-key">Founder</div>
               <div class="company-val">Aoi Tairako <span class="ja">平子葵</span></div>
             </div>
             <div class="company-row">
@@ -1063,7 +1283,7 @@
             </div>
             <div class="company-row">
               <div class="company-key">Industry</div>
-              <div class="company-val">Advertising &amp; Creative</div>
+              <div class="company-val">Global Creative Agency</div>
             </div>
             <div class="company-row">
               <div class="company-key">Qualified Invoice</div>
@@ -1084,14 +1304,15 @@
     <div class="section-inner">
       <div class="security-header reveal">
         <p class="section-label">Information Security</p>
-        <h2 class="section-title">情報セキュリティ基本方針</h2>
+        <h2 class="section-title">Information Security Policy</h2>
+        <h2 class="section-title" style="font-size: clamp(1.4rem, 3vw, 2rem); margin-top: 0.5rem; color: var(--ink-light);">情報セキュリティ基本方針</h2>
       </div>
 
       <div class="policy-card reveal">
         <h3 class="policy-headline">情報セキュリティ基本方針</h3>
 
         <p class="policy-intro">
-          AWESOME SAUCE合同会社（以下、当社）は、お客様からお預かりした情報資産を事故・災害・犯罪などの脅威から守り、お客様ならびに社会の信頼に応えるべく、以下の方針に基づき全社で情報セキュリティに取り組みます。
+          AWESOME SAUCE Inc.（以下、当社）は、お客様からお預かりした情報資産を事故・災害・犯罪などの脅威から守り、お客様ならびに社会の信頼に応えるべく、以下の方針に基づき全社で情報セキュリティに取り組みます。
         </p>
 
         <div class="policy-items">
@@ -1140,7 +1361,7 @@
 
         <div class="policy-meta">
           <p class="policy-meta-date">制定日: 2026年2月27日</p>
-          <p class="policy-meta-name">AWESOME SAUCE合同会社　代表社員 平子葵</p>
+          <p class="policy-meta-name">AWESOME SAUCE Inc. — Aoi Tairako / 平子葵</p>
         </div>
       </div>
 
@@ -1149,7 +1370,7 @@
 
 
   <!-- ===================================================
-       FOOTER
+       FOOTER — Light
   =================================================== -->
   <footer class="site-footer">
     <div class="footer-inner">
@@ -1160,12 +1381,38 @@
       <nav class="footer-links">
         <a href="#about">About</a>
         <a href="#services">Services</a>
+        <a href="#work">Work</a>
         <a href="#company">Company</a>
         <a href="#security">Security Policy</a>
       </nav>
+      <div class="footer-social">
+        <a href="https://vimeo.com/awesomesauceinc" target="_blank" rel="noopener" aria-label="Vimeo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.977 6.416c-.105 2.338-1.739 5.543-4.894 9.609-3.268 4.247-6.026 6.37-8.29 6.37-1.409 0-2.578-1.294-3.553-3.881L5.322 11.4C4.603 8.816 3.834 7.522 3.01 7.522c-.179 0-.806.378-1.881 1.132L0 7.197a315 315 0 0 0 3.501-3.123C5.08 2.701 6.266 1.984 7.055 1.91c1.867-.18 3.016 1.1 3.447 3.838.465 2.953.789 4.789.971 5.507.539 2.45 1.131 3.674 1.776 3.674.502 0 1.256-.796 2.265-2.385 1.004-1.589 1.54-2.797 1.612-3.628.144-1.371-.395-2.061-1.614-2.061-.574 0-1.167.121-1.777.391 1.186-3.868 3.434-5.757 6.762-5.637 2.473.06 3.628 1.664 3.493 4.797l-.013.01z"/></svg>
+        </a>
+        <a href="https://github.com/awesome-sauce-inc" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+      </div>
       <p class="footer-copy">&copy; 2026 AWESOME SAUCE Inc.</p>
     </div>
   </footer>
+
+  <!-- ===================================================
+       LANGUAGE TOGGLE SCRIPT
+  =================================================== -->
+  <script>
+    function toggleLang() {
+      const html = document.documentElement;
+      const label = document.getElementById('lang-label');
+      if (html.lang === 'en') {
+        html.lang = 'ja';
+        label.textContent = 'EN';
+      } else {
+        html.lang = 'en';
+        label.textContent = 'JA';
+      }
+    }
+  </script>
 
 </body>
 </html>
