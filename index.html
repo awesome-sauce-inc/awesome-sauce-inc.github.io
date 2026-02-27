@@ -636,69 +636,114 @@
     }
 
     /* =====================================================
-       WORK / VIMEO
+       WORK — Autoplay video showcase
     ===================================================== */
     .work-wrap {
-      background: var(--white);
+      background: var(--ink);
+      overflow: hidden;
     }
+    .work-wrap .section-label { color: var(--green); }
+    .work-wrap .section-title { color: var(--white); }
 
     .work-header {
       margin-bottom: 3rem;
     }
 
-    .vimeo-showcase {
+    .video-showcase {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
       margin-top: 2rem;
     }
-    .vimeo-embed {
+    .video-cell {
       position: relative;
-      width: 100%;
       padding-bottom: 56.25%;
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-md);
       overflow: hidden;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: #222;
     }
-    .vimeo-embed iframe {
+    .video-cell iframe {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       border: none;
+      pointer-events: none;
+    }
+    .video-cell-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,26,26,0.6) 0%, transparent 50%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .video-cell-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1rem 1.2rem;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .video-cell-client {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.2rem;
+    }
+    .video-cell-title {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.3;
     }
 
-    .vimeo-cta {
+    .work-cta {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 2rem;
+      margin-top: 3rem;
+      gap: 1.5rem;
+      flex-wrap: wrap;
     }
-    .vimeo-link {
+    .work-cta-btn {
       font-family: var(--font-display);
       font-size: 0.88rem;
       font-weight: 600;
       letter-spacing: 0.04em;
-      color: var(--ink-mid);
+      padding: 0.9rem 2.2rem;
+      border-radius: 100px;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      color: var(--white);
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 32px rgba(62,179,112,0.25);
+    }
+    .work-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(62,179,112,0.35);
+    }
+    .work-cta-vimeo {
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 0.9rem 2.2rem;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.7);
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      padding: 0.8rem 2rem;
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      transition: all 0.2s;
+      gap: 0.5rem;
+      transition: border-color 0.2s, color 0.2s;
     }
-    .vimeo-link:hover {
-      border-color: var(--green);
-      color: var(--green);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(62,179,112,0.12);
+    .work-cta-vimeo:hover {
+      border-color: rgba(255,255,255,0.5);
+      color: var(--white);
     }
-    .vimeo-link svg {
-      width: 18px;
-      height: 18px;
-    }
+    .work-cta-vimeo svg { width: 16px; height: 16px; }
 
     /* =====================================================
        COMPANY
@@ -954,6 +999,7 @@
 
       .services-grid { grid-template-columns: 1fr; }
       .services-header { flex-direction: column; align-items: flex-start; }
+      .video-showcase { grid-template-columns: 1fr; }
 
       .company-layout { grid-template-columns: 1fr; gap: 2.5rem; }
       .company-intro { max-width: 100%; }
@@ -1209,7 +1255,7 @@
   <div class="divider-line"></div>
 
   <!-- ===================================================
-       WORK / VIMEO PORTFOLIO
+       WORK — Autoplay video showcase
   =================================================== -->
   <section id="work" class="section-wrap work-wrap">
     <div class="section-inner">
@@ -1219,23 +1265,16 @@
         <h2 class="section-title ja-only">制作実績</h2>
       </div>
 
-      <div class="vimeo-showcase reveal">
-        <div class="vimeo-embed">
-          <iframe
-            src="https://player.vimeo.com/video/awesomesauceinc?background=1&autoplay=0&title=0&byline=0&portrait=0"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowfullscreen
-            loading="lazy"
-            title="AWESOME SAUCE Inc. Portfolio"
-          ></iframe>
-        </div>
+      <div class="video-showcase reveal" id="video-showcase">
+        <!-- 3 random videos injected by JS -->
       </div>
 
-      <div class="vimeo-cta reveal">
-        <a href="https://vimeo.com/awesomesauceinc" target="_blank" rel="noopener" class="vimeo-link">
+      <div class="work-cta reveal">
+        <a href="works.html" class="work-cta-btn en-only">View All Works</a>
+        <a href="works.html" class="work-cta-btn ja-only">全作品を見る</a>
+        <a href="https://vimeo.com/awesomesauceinc" target="_blank" rel="noopener" class="work-cta-vimeo">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.977 6.416c-.105 2.338-1.739 5.543-4.894 9.609-3.268 4.247-6.026 6.37-8.29 6.37-1.409 0-2.578-1.294-3.553-3.881L5.322 11.4C4.603 8.816 3.834 7.522 3.01 7.522c-.179 0-.806.378-1.881 1.132L0 7.197a315 315 0 0 0 3.501-3.123C5.08 2.701 6.266 1.984 7.055 1.91c1.867-.18 3.016 1.1 3.447 3.838.465 2.953.789 4.789.971 5.507.539 2.45 1.131 3.674 1.776 3.674.502 0 1.256-.796 2.265-2.385 1.004-1.589 1.54-2.797 1.612-3.628.144-1.371-.395-2.061-1.614-2.061-.574 0-1.167.121-1.777.391 1.186-3.868 3.434-5.757 6.762-5.637 2.473.06 3.628 1.664 3.493 4.797l-.013.01z"/></svg>
-          <span class="en-only">View Full Portfolio on Vimeo</span>
-          <span class="ja-only">Vimeoでポートフォリオを見る</span>
+          Vimeo
         </a>
       </div>
     </div>
@@ -1401,6 +1440,7 @@
        LANGUAGE TOGGLE SCRIPT
   =================================================== -->
   <script>
+    // Language toggle
     function toggleLang() {
       const html = document.documentElement;
       const label = document.getElementById('lang-label');
@@ -1412,6 +1452,55 @@
         label.textContent = 'JA';
       }
     }
+
+    // Random autoplay video showcase
+    (function() {
+      const videos = [
+        { id: '297846874', client: 'NITORI', title: 'Creation!' },
+        { id: '274288506', client: 'SHONAN NO KAZE', title: 'RIVAL' },
+        { id: '225748921', client: 'SMAMOBA', title: 'YOSHIKI RISA PV' },
+        { id: '274288613', client: 'BAND JA NAIMON!', title: 'FAN+TIC' },
+        { id: '274288583', client: 'une nana cool', title: 'MOGAMI MOGA' },
+        { id: '460156480', client: 'TEPCO', title: 'Hakken! FUKUSHIMA vol.3' },
+        { id: '460153289', client: 'TEPCO', title: 'Hakken! FUKUSHIMA vol.2' },
+        { id: '297862726', client: 'TEPCO', title: 'Hakken! FUKUSHIMA vol.1' },
+        { id: '460152877', client: 'Froebel-Kan', title: 'DEKIROUTE 2019' },
+        { id: '460148448', client: 'Sumida Aquarium', title: 'Sumida Aquarium 2019' },
+        { id: '460145562', client: 'Kyoto Aquarium', title: 'Kyoto Aquarium 2019' },
+        { id: '274289204', client: 'EDWIN', title: 'SOMETHING COOL 2017SS' },
+        { id: '274289177', client: 'EDWIN', title: 'JERSEYS 2017SS' },
+        { id: '274289160', client: 'EDWIN', title: 'C17 COOL 2017SS' },
+        { id: '274289143', client: 'EDWIN', title: '503 COOL 2017SS' },
+        { id: '225748494', client: 'SMAMOBA', title: 'IKEDA ELAIZA CM' },
+        { id: '460136096', client: 'Japan Gov.', title: 'Resilient Japan — Kumamoto' },
+        { id: '460136060', client: 'Japan Gov.', title: 'Resilient Japan — Art' },
+        { id: '460135640', client: 'Japan Gov.', title: 'Resilient Japan — Western Portal' },
+        { id: '460134767', client: 'Japan Gov.', title: 'Resilient Japan — Niseko' }
+      ];
+
+      // Shuffle and pick 3
+      const shuffled = videos.sort(() => Math.random() - 0.5);
+      const picked = shuffled.slice(0, 3);
+
+      const container = document.getElementById('video-showcase');
+      if (!container) return;
+
+      picked.forEach(v => {
+        container.innerHTML += `
+          <div class="video-cell">
+            <iframe
+              src="https://player.vimeo.com/video/${v.id}?background=1&autoplay=1&muted=1&loop=1&quality=auto"
+              allow="autoplay"
+              loading="lazy"
+            ></iframe>
+            <div class="video-cell-overlay"></div>
+            <div class="video-cell-info">
+              <p class="video-cell-client">${v.client}</p>
+              <p class="video-cell-title">${v.title}</p>
+            </div>
+          </div>`;
+      });
+    })();
   </script>
 
 </body>
