@@ -100,7 +100,7 @@
       border-radius: 50%;
       background: var(--green);
       opacity: 0;
-      animation: dropImpact 10s 1.5s ease-out infinite;
+      animation: dropImpact 14s 1.5s ease-out infinite;
     }
     @keyframes dropImpact {
       0%        { transform: scale(0); opacity: 0; }
@@ -119,24 +119,24 @@
       width: 120vmax; height: 120vmax;
       margin: -60vmax 0 0 -60vmax;
       border: 2.5px solid rgba(62,179,112,0.5);
-      animation: ringExpand 10s 1.5s ease-out infinite;
+      animation: ringExpand 14s 1.5s ease-out infinite;
     }
     .drop-ring-2 {
       width: 160vmax; height: 160vmax;
       margin: -80vmax 0 0 -80vmax;
       border: 2px solid rgba(62,179,112,0.35);
-      animation: ringExpand 10s 2s ease-out infinite;
+      animation: ringExpand 14s 2.2s ease-out infinite;
     }
     .drop-ring-3 {
       width: 200vmax; height: 200vmax;
       margin: -100vmax 0 0 -100vmax;
       border: 1.5px solid rgba(26,150,213,0.25);
-      animation: ringExpand 10s 2.6s ease-out infinite;
+      animation: ringExpand 14s 3s ease-out infinite;
     }
     @keyframes ringExpand {
       0%   { transform: scale(0); opacity: 0; }
       2%   { opacity: 1; }
-      30%  { transform: scale(1); opacity: 0; }
+      40%  { transform: scale(1); opacity: 0; }
       100% { opacity: 0; }
     }
 
