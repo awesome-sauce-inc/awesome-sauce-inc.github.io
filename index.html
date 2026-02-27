@@ -54,6 +54,26 @@
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Full-page animated gradient background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.12;
+      background: linear-gradient(135deg,
+        #3EB370 0%,
+        #1A96D5 25%,
+        #a5d509 50%,
+        #3EB370 75%,
+        #1A96D5 100%
+      );
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      pointer-events: none;
     }
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
@@ -126,7 +146,7 @@
       gap: 0.75rem;
     }
     .logo-wrap img {
-      height: 38px;
+      height: 52px;
       width: auto;
     }
 
@@ -194,23 +214,6 @@
       padding: 8rem 2rem 6rem;
       position: relative;
       overflow: hidden;
-      background: var(--white);
-    }
-
-    /* Animated gradient background — pagedrop.jp inspired */
-    .hero-gradient {
-      position: absolute;
-      inset: 0;
-      opacity: 0.18;
-      background: linear-gradient(135deg,
-        #3EB370 0%,
-        #1A96D5 25%,
-        #a5d509 50%,
-        #3EB370 75%,
-        #1A96D5 100%
-      );
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
     }
 
     @keyframes gradientShift {
@@ -420,7 +423,7 @@
        ABOUT
     ===================================================== */
     .about-wrap {
-      background: var(--white);
+      background: rgba(255,255,255,0.75);
     }
 
     .about-layout {
@@ -573,7 +576,7 @@
        SERVICES
     ===================================================== */
     .services-wrap {
-      background: var(--surface);
+      background: rgba(247,248,246,0.8);
     }
 
     .services-header {
@@ -684,66 +687,114 @@
       margin-bottom: 3rem;
     }
 
-    .video-showcase-outer {
-      max-width: 1400px;
+    /* Featured video — single large cell */
+    .video-featured-outer {
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0 1.5rem;
     }
-    .video-showcase {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-      margin-top: 2rem;
-    }
-    .video-cell {
+    .video-featured {
       position: relative;
       padding-bottom: 56.25%;
-      border-radius: var(--radius-md);
+      border-radius: var(--radius-lg);
       overflow: hidden;
-      background: #222;
+      background: #111;
+      margin-top: 2rem;
     }
-    .video-cell iframe {
+    .video-featured iframe {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       border: none;
       pointer-events: none;
-      transition: opacity 0.8s ease;
+      transition: opacity 1s ease;
     }
-    .video-cell iframe.fade-out {
+    .video-featured iframe.fade-out {
       opacity: 0;
     }
-    .video-cell-overlay {
+    .video-featured-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(26,26,26,0.6) 0%, transparent 50%);
+      background: linear-gradient(to top, rgba(26,26,26,0.7) 0%, transparent 40%);
       z-index: 1;
       pointer-events: none;
     }
-    .video-cell-info {
+    .video-featured-info {
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      padding: 1rem 1.2rem;
+      padding: 2rem 2.5rem;
       z-index: 2;
       pointer-events: none;
-      transition: opacity 0.5s ease;
     }
-    .video-cell-client {
+    .video-featured-client {
       font-family: var(--font-display);
-      font-size: 0.65rem;
+      font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--green);
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.4rem;
     }
-    .video-cell-title {
+    .video-featured-title {
       font-family: var(--font-display);
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 700;
       color: var(--white);
-      line-height: 1.3;
+      line-height: 1.25;
+    }
+
+    /* Thumbnail strip below featured video */
+    .video-thumbs {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.2) transparent;
+    }
+    .video-thumbs::-webkit-scrollbar { height: 4px; }
+    .video-thumbs::-webkit-scrollbar-track { background: transparent; }
+    .video-thumbs::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
+    .video-thumb {
+      flex: 0 0 auto;
+      width: 140px;
+      aspect-ratio: 16/9;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      background: #222;
+      border: 2px solid transparent;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+    .video-thumb:hover,
+    .video-thumb.active {
+      border-color: var(--green);
+      transform: scale(1.04);
+    }
+    .video-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.3s;
+    }
+    .video-thumb-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0.3rem 0.5rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      font-family: var(--font-display);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.9);
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .work-cta {
@@ -794,7 +845,7 @@
        COMPANY
     ===================================================== */
     .company-wrap {
-      background: var(--surface);
+      background: rgba(247,248,246,0.8);
     }
 
     .company-layout {
@@ -951,7 +1002,7 @@
 
       .services-grid { grid-template-columns: 1fr; }
       .services-header { flex-direction: column; align-items: flex-start; }
-      .video-showcase { grid-template-columns: 1fr; gap: 0.5rem; }
+      .video-thumb { width: 110px; }
 
       .company-layout { grid-template-columns: 1fr; gap: 2.5rem; }
       .company-intro { max-width: 100%; }
@@ -1011,7 +1062,6 @@
        HERO — Light + animated gradient
   =================================================== -->
   <section class="hero">
-    <div class="hero-gradient"></div>
     <div class="hero-orb hero-orb-1"></div>
     <div class="hero-orb hero-orb-2"></div>
     <div class="hero-orb hero-orb-3"></div>
@@ -1021,19 +1071,17 @@
       <p class="hero-eyebrow ja-only">グローバル・クリエイティブエージェンシー &mdash; 渋谷, 東京</p>
 
       <h1 class="hero-title en-only">
-        Creative <span class="accent">Synergy,</span><br>
-        One Drop<br>at a Time.
+        <span class="accent">One Drop.</span>
       </h1>
       <h1 class="hero-title ja-only">
-        <span class="accent">一滴</span>が、<br>
-        すべてを<br>変える。
+        <span class="accent">一滴の、</span><br>雫。
       </h1>
 
       <p class="hero-sub en-only">
-        A global creative agency crafting bold ideas and digital strategies for brands that dare to move first.
+        One idea, perfectly placed, transforms everything.
       </p>
       <p class="hero-sub ja-only">
-        先駆けるブランドのために、大胆なアイデアとデジタル戦略を。渋谷から世界へ。
+        ひとつのアイデアを、最適な場所に。すべてが変わる。
       </p>
 
       <div class="hero-actions">
@@ -1060,17 +1108,17 @@
         <div class="about-left reveal">
           <p class="section-label">About</p>
           <h2 class="section-title en-only">We don't make ads.<br>We create context.</h2>
-          <h2 class="section-title ja-only">広告をつくるのではない。<br>文脈をつくる。</h2>
+          <h2 class="section-title ja-only">広告をつくるのではない。<br>文脈を創造する。</h2>
 
           <p class="about-body en-only">
-            The same content, placed in a different context, changes meaning fundamentally. AWESOME SAUCE is the agency that designs that context — the invisible field where brands find their true voice.
+            The same content, placed in a different context, transforms meaning entirely. AWESOME SAUCE is the agency that nurtures that context — the field where brands discover their authentic voice.
           </p>
           <p class="about-body en-only" style="margin-top:1rem;">
             One drop of the right idea, like one drop of the right sauce, elevates everything it touches.
           </p>
 
           <p class="about-body ja-only">
-            同じコンテンツでも、文脈が変われば意味は根本的に変わる。AWESOME SAUCEは、その文脈を創造するエージェンシーです。ブランドが本当の声を見つける、目に見えない場を生み出します。
+            同じコンテンツでも、文脈が変われば意味は根本から変容する。AWESOME SAUCEは、その文脈を育むエージェンシーです。ブランドが本来の声を見出す、目に見えない場を生み出します。
           </p>
           <p class="about-body ja-only" style="margin-top:1rem;">
             適切なアイデアの一滴は、適切なソースの一滴のように、触れるものすべてを引き立てます。
@@ -1097,10 +1145,10 @@
             <h3 class="about-card-title ja-only">一滴の雫。</h3>
 
             <p class="about-card-body en-only">
-              The drop in our logo represents our belief: one concentrated idea, perfectly placed, can transform everything. We don't flood — we distill.
+              The drop in our logo represents our belief: one concentrated idea, perfectly placed, can transform everything. We distill — we never overwhelm.
             </p>
             <p class="about-card-body ja-only">
-              ロゴの雫は、私たちの信念そのもの。凝縮されたひとつのアイデアを、最適な場所に。あふれさせるのではなく、蒸留する。
+              ロゴの雫は、私たちの信念そのもの。凝縮されたひとつのアイデアを、最適な場所に。蒸留する。圧倒するのではなく。
             </p>
 
             <div class="philosophy-principles">
@@ -1116,10 +1164,10 @@
               <div class="philosophy-item">
                 <span class="philosophy-num">02</span>
                 <div>
-                  <p class="philosophy-title en-only">Attract, Never Push</p>
-                  <p class="philosophy-title ja-only">押すのではなく、惹きつける</p>
-                  <p class="philosophy-desc en-only">Great work draws people in. It doesn't shout — it resonates.</p>
-                  <p class="philosophy-desc ja-only">良い仕事は人を引き寄せる。叫ぶのではなく、響かせる。</p>
+                  <p class="philosophy-title en-only">Power, Not Force</p>
+                  <p class="philosophy-title ja-only">力ではなく、パワー</p>
+                  <p class="philosophy-desc en-only">True creative power is effortless — it uplifts, aligns, and inspires without coercion.</p>
+                  <p class="philosophy-desc ja-only">真のクリエイティブは、無理なく高め、調和し、自然と人の心を動かす。</p>
                 </div>
               </div>
               <div class="philosophy-item">
@@ -1158,8 +1206,8 @@
       <div class="services-header">
         <div class="reveal">
           <p class="section-label">Services</p>
-          <h2 class="section-title en-only">What we do<br>exceptionally well.</h2>
-          <h2 class="section-title ja-only">私たちの<br>得意分野。</h2>
+          <h2 class="section-title en-only">What we nurture<br>into being.</h2>
+          <h2 class="section-title ja-only">私たちが<br>育むもの。</h2>
         </div>
       </div>
 
@@ -1173,10 +1221,10 @@
           <h3 class="service-title en-only">Strategy &amp; Creative</h3>
           <h3 class="service-title ja-only">戦略 &amp; クリエイティブ</h3>
           <p class="service-desc en-only">
-            We think alongside you before we create for you. From brand vision to campaign execution, we find the right context for your story — then bring it to life.
+            We think alongside you before we create for you. From brand vision to campaign realization, we discover the right context for your story — then bring it to life.
           </p>
           <p class="service-desc ja-only">
-            つくる前に、一緒に考える。ブランドのビジョンからキャンペーンの実行まで、あなたのストーリーに最適な文脈を見つけ、形にします。
+            つくる前に、一緒に考える。ブランドのビジョンからキャンペーンの実現まで、あなたのストーリーに最適な文脈を見出し、形にします。
           </p>
           <div class="service-tag-row">
             <span class="tag">Brand Strategy</span>
@@ -1193,10 +1241,10 @@
           <h3 class="service-title en-only">Marketing &amp; Growth</h3>
           <h3 class="service-title ja-only">マーケティング &amp; グロース</h3>
           <p class="service-desc en-only">
-            Online, offline, and everything in between. We design integrated marketing strategies that grow audiences and turn attention into lasting relationships.
+            Online, offline, and everything in between. We cultivate integrated marketing that grows communities and nurtures trust into lasting relationships.
           </p>
           <p class="service-desc ja-only">
-            オンラインもオフラインも、その間にあるすべてのチャネルで。オーディエンスを育て、関心を持続的な関係に変える統合マーケティング戦略を設計します。
+            オンラインもオフラインも、その間にあるすべてのチャネルで。コミュニティを育み、信頼を持続的な関係へと昇華する統合マーケティングを。
           </p>
           <div class="service-tag-row">
             <span class="tag">Integrated Marketing</span>
@@ -1213,10 +1261,10 @@
           <h3 class="service-title en-only">Content Production</h3>
           <h3 class="service-title ja-only">コンテンツ制作</h3>
           <p class="service-desc en-only">
-            Video, photography, editorial and interactive — we produce content that earns attention. With a network of Tokyo and international talent, we deliver at every scale.
+            Video, photography, editorial and interactive — we create content that resonates naturally. With a network of Tokyo and international talent, we serve every scale with care.
           </p>
           <p class="service-desc ja-only">
-            映像、写真、エディトリアル、インタラクティブ — 注目を集めるコンテンツを制作。東京と世界のタレントネットワークで、あらゆるスケールに対応。
+            映像、写真、エディトリアル、インタラクティブ — 自然と心に響くコンテンツを制作。東京と世界のタレントネットワークで、丁寧にあらゆるスケールに対応。
           </p>
           <div class="service-tag-row">
             <span class="tag">Video</span>
@@ -1238,13 +1286,16 @@
     <div class="section-inner">
       <div class="work-header reveal">
         <p class="section-label">Work</p>
-        <h2 class="section-title en-only">Our work speaks.</h2>
-        <h2 class="section-title ja-only">作品が語る。</h2>
+        <h2 class="section-title en-only">Our work speaks<br>for itself.</h2>
+        <h2 class="section-title ja-only">作品が、<br>語る。</h2>
       </div>
     </div>
-    <div class="video-showcase-outer">
-      <div class="video-showcase" id="video-showcase">
-        <!-- 3 cells, videos cycle every few seconds via JS -->
+    <div class="video-featured-outer">
+      <div class="video-featured" id="video-featured">
+        <!-- Single large featured video, loaded by JS -->
+      </div>
+      <div class="video-thumbs" id="video-thumbs">
+        <!-- Thumbnail strip, built by JS -->
       </div>
     </div>
     <div class="section-inner">
@@ -1275,10 +1326,10 @@
 
         <div class="company-left reveal">
           <p class="company-intro en-only">
-            AWESOME SAUCE Inc. is headquartered in Shibuya, Tokyo — one of the world's most vibrant creative districts. We operate with the agility of a boutique and the ambition of a global agency.
+            AWESOME SAUCE Inc. is based in Shibuya, Tokyo — one of the world's most vibrant creative districts. We flow with the agility of a boutique and the vision of a global creative studio.
           </p>
           <p class="company-intro ja-only">
-            AWESOME SAUCE Inc.は、世界で最も活気あるクリエイティブ地区のひとつ、東京・渋谷に本社を構えています。ブティックの機動力とグローバルエージェンシーの志を併せ持ちます。
+            AWESOME SAUCE Inc.は、世界で最も活気あるクリエイティブ地区のひとつ、東京・渋谷に拠点を置いています。ブティックの機動力とグローバルスタジオのビジョンを併せ持ちます。
           </p>
         </div>
 
@@ -1383,7 +1434,7 @@
       });
     })();
 
-    // Video remix showcase — cycles all 20 videos across 3 cells
+    // Featured video showcase — single large player + thumbnail strip
     (function() {
       const videos = [
         { id: '297846874', client: 'NITORI', title: 'Creation!' },
@@ -1408,57 +1459,78 @@
         { id: '460134767', client: 'Japan Gov.', title: 'Resilient Japan — Niseko' }
       ];
 
-      const container = document.getElementById('video-showcase');
-      if (!container) return;
+      const featured = document.getElementById('video-featured');
+      const thumbsContainer = document.getElementById('video-thumbs');
+      if (!featured || !thumbsContainer) return;
 
-      // Shuffle
-      const shuffled = videos.sort(() => Math.random() - 0.5);
-      let queue = [...shuffled];
-      let queueIndex = 3; // first 3 already used
+      let currentIndex = 0;
+      let autoTimer = null;
 
-      // Create 3 cells with initial videos
-      const cells = [];
-      for (let i = 0; i < 3; i++) {
-        const v = queue[i];
-        const cell = document.createElement('div');
-        cell.className = 'video-cell';
-        cell.innerHTML = `
-          <iframe src="https://player.vimeo.com/video/${v.id}?background=1&autoplay=1&muted=1&loop=1&quality=auto" allow="autoplay" loading="lazy"></iframe>
-          <div class="video-cell-overlay"></div>
-          <div class="video-cell-info">
-            <p class="video-cell-client">${v.client}</p>
-            <p class="video-cell-title">${v.title}</p>
-          </div>`;
-        container.appendChild(cell);
-        cells.push(cell);
+      // Vimeo thumbnail URL (from their oEmbed / simple pattern)
+      function thumbUrl(id) {
+        return `https://vumbnail.com/${id}.jpg`;
       }
 
-      // Cycle: every 5 seconds, swap one cell's video
-      let cellTurn = 0;
-      setInterval(() => {
-        if (queueIndex >= queue.length) {
-          // Reshuffle when all videos shown
-          queue = [...videos].sort(() => Math.random() - 0.5);
-          queueIndex = 0;
+      function loadFeatured(index) {
+        const v = videos[index];
+        const existingIframe = featured.querySelector('iframe');
+
+        if (existingIframe) {
+          existingIframe.classList.add('fade-out');
+          setTimeout(() => {
+            existingIframe.src = `https://player.vimeo.com/video/${v.id}?background=1&autoplay=1&muted=1&loop=1&quality=auto`;
+            featured.querySelector('.video-featured-client').textContent = v.client;
+            featured.querySelector('.video-featured-title').textContent = v.title;
+            setTimeout(() => existingIframe.classList.remove('fade-out'), 400);
+          }, 600);
+        } else {
+          featured.innerHTML = `
+            <iframe src="https://player.vimeo.com/video/${v.id}?background=1&autoplay=1&muted=1&loop=1&quality=auto" allow="autoplay"></iframe>
+            <div class="video-featured-overlay"></div>
+            <div class="video-featured-info">
+              <p class="video-featured-client">${v.client}</p>
+              <p class="video-featured-title">${v.title}</p>
+            </div>`;
         }
-        const nextVideo = queue[queueIndex++];
-        const cell = cells[cellTurn];
-        const iframe = cell.querySelector('iframe');
-        const clientEl = cell.querySelector('.video-cell-client');
-        const titleEl = cell.querySelector('.video-cell-title');
 
-        // Fade out
-        iframe.classList.add('fade-out');
-        setTimeout(() => {
-          iframe.src = `https://player.vimeo.com/video/${nextVideo.id}?background=1&autoplay=1&muted=1&loop=1&quality=auto`;
-          clientEl.textContent = nextVideo.client;
-          titleEl.textContent = nextVideo.title;
-          // Fade in after src loads
-          setTimeout(() => iframe.classList.remove('fade-out'), 300);
-        }, 800);
+        // Update active thumb
+        thumbsContainer.querySelectorAll('.video-thumb').forEach((t, i) => {
+          t.classList.toggle('active', i === index);
+        });
+        currentIndex = index;
+      }
 
-        cellTurn = (cellTurn + 1) % 3;
-      }, 5000);
+      // Build thumbnail strip
+      videos.forEach((v, i) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'video-thumb' + (i === 0 ? ' active' : '');
+        thumb.innerHTML = `
+          <img src="${thumbUrl(v.id)}" alt="${v.title}" loading="lazy">
+          <span class="video-thumb-label">${v.client}</span>`;
+        thumb.addEventListener('click', () => {
+          loadFeatured(i);
+          resetAutoPlay();
+        });
+        thumbsContainer.appendChild(thumb);
+      });
+
+      // Load first video
+      loadFeatured(0);
+
+      // Auto-advance every 8 seconds
+      function autoAdvance() {
+        autoTimer = setInterval(() => {
+          const next = (currentIndex + 1) % videos.length;
+          loadFeatured(next);
+        }, 8000);
+      }
+
+      function resetAutoPlay() {
+        clearInterval(autoTimer);
+        autoAdvance();
+      }
+
+      autoAdvance();
     })();
   </script>
 
