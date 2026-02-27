@@ -88,8 +88,8 @@
       position: absolute;
       z-index: 2;
       pointer-events: none;
-      top: 62%;
-      left: 38%;
+      top: 50%;
+      left: 50%;
       width: 0; height: 0;
     }
     /* The drop impact dot */
@@ -116,21 +116,21 @@
       opacity: 0;
     }
     .drop-ring-1 {
-      width: 300px; height: 300px;
-      margin: -150px 0 0 -150px;
-      border: 2px solid rgba(62,179,112,0.35);
+      width: 120vmax; height: 120vmax;
+      margin: -60vmax 0 0 -60vmax;
+      border: 2.5px solid rgba(62,179,112,0.5);
       animation: ringExpand 10s 1.5s ease-out infinite;
     }
     .drop-ring-2 {
-      width: 500px; height: 500px;
-      margin: -250px 0 0 -250px;
-      border: 1.5px solid rgba(62,179,112,0.22);
+      width: 160vmax; height: 160vmax;
+      margin: -80vmax 0 0 -80vmax;
+      border: 2px solid rgba(62,179,112,0.35);
       animation: ringExpand 10s 2s ease-out infinite;
     }
     .drop-ring-3 {
-      width: 700px; height: 700px;
-      margin: -350px 0 0 -350px;
-      border: 1px solid rgba(26,150,213,0.15);
+      width: 200vmax; height: 200vmax;
+      margin: -100vmax 0 0 -100vmax;
+      border: 1.5px solid rgba(26,150,213,0.25);
       animation: ringExpand 10s 2.6s ease-out infinite;
     }
     @keyframes ringExpand {
