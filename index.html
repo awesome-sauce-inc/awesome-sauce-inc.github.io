@@ -301,10 +301,23 @@
     }
 
     .hero-title .accent {
-      background: linear-gradient(90deg, var(--green), var(--blue));
+      background: linear-gradient(
+        90deg,
+        var(--green) 0%,
+        var(--blue) 40%,
+        #7ee8fa 50%,
+        var(--blue) 60%,
+        var(--green) 100%
+      );
+      background-size: 200% 100%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%, 100% { background-position: 100% 0; }
+      50%      { background-position: -100% 0; }
     }
 
     .hero-sub {
@@ -426,7 +439,7 @@
        ABOUT — unified (About + Philosophy merged)
     ===================================================== */
     .about-wrap {
-      background: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.5);
     }
 
     .about-intro {
@@ -481,7 +494,7 @@
        SERVICES
     ===================================================== */
     .services-wrap {
-      background: rgba(247,248,246,0.75);
+      background: rgba(247,248,246,0.5);
     }
 
     .services-header {
@@ -676,7 +689,7 @@
        COMPANY — card-style (no table)
     ===================================================== */
     .company-wrap {
-      background: rgba(247,248,246,0.75);
+      background: rgba(247,248,246,0.5);
     }
 
     .company-content {
@@ -727,7 +740,7 @@
     .site-footer {
       position: relative;
       z-index: 1;
-      background: rgba(247,248,246,0.9);
+      background: rgba(247,248,246,0.7);
       color: var(--ink-light);
       padding: 3rem;
       border-top: 1px solid var(--border);
@@ -951,7 +964,7 @@
           <p class="philosophy-title en-only">Make It Awesome</p>
           <p class="philosophy-title ja-only">みんなを、豊かにする</p>
           <p class="philosophy-desc en-only">We don't chase profit for its own sake. We pursue what's essential — work that enriches everyone it touches and makes the world a little more awesome.</p>
-          <p class="philosophy-desc ja-only">利益のための利益は追わない。本質を追求し、関わるすべての人が豊かになる仕事を。世界をもっと最高に。</p>
+          <p class="philosophy-desc ja-only">数字よりも、本質。関わるすべての人が豊かになる仕事を。世界をもっと最高に。</p>
         </div>
       </div>
 
@@ -1052,12 +1065,12 @@
     <div class="work-content reveal">
       <p class="section-label">Work</p>
       <h2 class="section-title en-only">Our Work in Motion</h2>
-      <h2 class="section-title ja-only">動き続ける、私たちの仕事</h2>
+      <h2 class="section-title ja-only">つくってきたもの</h2>
       <p class="work-message en-only">
         From national campaigns to indie passion projects — every piece carries the same care and creative energy. See the full collection on Vimeo, or browse the archive.
       </p>
       <p class="work-message ja-only">
-        ナショナルキャンペーンからインディーズまで — すべてのプロジェクトに同じ情熱とクリエイティブを注ぐ。Vimeoで映像を、アーカイブで全作品をご覧ください。
+        大手のキャンペーンも、インディーズの情熱プロジェクトも、注ぐ想いは同じ。映像はVimeoで、全作品はアーカイブからどうぞ。
       </p>
       <div class="work-actions">
         <a href="works.html" class="work-btn-primary">View All Works</a>
@@ -1122,6 +1135,9 @@
         <a href="#company">Company</a>
       </nav>
       <div class="footer-social">
+        <a id="footer-email" aria-label="Email">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </a>
         <a href="https://vimeo.com/awesomesauceinc" target="_blank" rel="noopener" aria-label="Vimeo">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.977 6.416c-.105 2.338-1.739 5.543-4.894 9.609-3.268 4.247-6.026 6.37-8.29 6.37-1.409 0-2.578-1.294-3.553-3.881L5.322 11.4C4.603 8.816 3.834 7.522 3.01 7.522c-.179 0-.806.378-1.881 1.132L0 7.197a315 315 0 0 0 3.501-3.123C5.08 2.701 6.266 1.984 7.055 1.91c1.867-.18 3.016 1.1 3.447 3.838.465 2.953.789 4.789.971 5.507.539 2.45 1.131 3.674 1.776 3.674.502 0 1.256-.796 2.265-2.385 1.004-1.589 1.54-2.797 1.612-3.628.144-1.371-.395-2.061-1.614-2.061-.574 0-1.167.121-1.777.391 1.186-3.868 3.434-5.757 6.762-5.637 2.473.06 3.628 1.664 3.493 4.797l-.013.01z"/></svg>
         </a>
@@ -1202,6 +1218,14 @@
       iframe.allow = 'autoplay';
       iframe.loading = 'lazy';
       container.appendChild(iframe);
+    })();
+
+    // Email obfuscation (anti-spam)
+    (function() {
+      var e = document.getElementById('footer-email');
+      if (!e) return;
+      var u = 'as', d = 'awesome-sauce.co.jp';
+      e.href = 'mai' + 'lto:' + u + '@' + d;
     })();
   </script>
 
