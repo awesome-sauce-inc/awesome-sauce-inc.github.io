@@ -83,33 +83,61 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Subtle ripple drops — CSS only */
-    .ripple-layer {
-      position: fixed;
-      inset: 0;
+    /* One Drop — single drop ripple, 10s cycle */
+    .drop-origin {
+      position: absolute;
       z-index: 2;
       pointer-events: none;
-      overflow: hidden;
+      top: 62%;
+      left: 38%;
+      width: 0; height: 0;
     }
-    .ripple {
+    /* The drop impact dot */
+    .drop-dot {
+      position: absolute;
+      width: 6px; height: 6px;
+      margin: -3px 0 0 -3px;
+      border-radius: 50%;
+      background: var(--green);
+      opacity: 0;
+      animation: dropImpact 10s 1.5s ease-out infinite;
+    }
+    @keyframes dropImpact {
+      0%        { transform: scale(0); opacity: 0; }
+      1%        { transform: scale(1.8); opacity: 0.6; }
+      4%        { transform: scale(0.6); opacity: 0.3; }
+      8%        { opacity: 0; }
+      100%      { opacity: 0; }
+    }
+    /* Ripple rings — 3 concentric, staggered */
+    .drop-ring {
       position: absolute;
       border-radius: 50%;
-      border: 1.5px solid rgba(62,179,112,0.18);
-      animation: rippleExpand var(--dur) var(--delay) ease-out infinite;
       opacity: 0;
     }
-    .ripple::after {
-      content: '';
-      position: absolute;
-      inset: 15%;
-      border-radius: 50%;
-      border: 1px solid rgba(26,150,213,0.14);
-      animation: rippleExpand calc(var(--dur) * 0.8) calc(var(--delay) + 0.6s) ease-out infinite;
-      opacity: 0;
+    .drop-ring-1 {
+      width: 300px; height: 300px;
+      margin: -150px 0 0 -150px;
+      border: 2px solid rgba(62,179,112,0.35);
+      animation: ringExpand 10s 1.5s ease-out infinite;
     }
-    @keyframes rippleExpand {
-      0%   { transform: scale(0); opacity: 1; }
-      100% { transform: scale(1); opacity: 0; }
+    .drop-ring-2 {
+      width: 500px; height: 500px;
+      margin: -250px 0 0 -250px;
+      border: 1.5px solid rgba(62,179,112,0.22);
+      animation: ringExpand 10s 2s ease-out infinite;
+    }
+    .drop-ring-3 {
+      width: 700px; height: 700px;
+      margin: -350px 0 0 -350px;
+      border: 1px solid rgba(26,150,213,0.15);
+      animation: ringExpand 10s 2.6s ease-out infinite;
+    }
+    @keyframes ringExpand {
+      0%   { transform: scale(0); opacity: 0; }
+      2%   { opacity: 1; }
+      30%  { transform: scale(1); opacity: 0; }
+      100% { opacity: 0; }
     }
 
     /* =====================================================
@@ -896,15 +924,7 @@
 </head>
 <body>
 
-  <!-- Ripple water-drop effect -->
-  <div class="ripple-layer">
-    <div class="ripple" style="width:280px;height:280px;top:12%;left:8%;--dur:7s;--delay:0s"></div>
-    <div class="ripple" style="width:200px;height:200px;top:45%;right:12%;--dur:9s;--delay:2s"></div>
-    <div class="ripple" style="width:340px;height:340px;bottom:18%;left:55%;--dur:11s;--delay:4s"></div>
-    <div class="ripple" style="width:160px;height:160px;top:70%;left:15%;--dur:8s;--delay:1.5s"></div>
-    <div class="ripple" style="width:240px;height:240px;top:25%;right:25%;--dur:10s;--delay:3.5s"></div>
-    <div class="ripple" style="width:180px;height:180px;bottom:35%;left:35%;--dur:8.5s;--delay:5.5s"></div>
-  </div>
+  <!-- One Drop ripple effect (hero area) -->
 
 
   <!-- Full-page animated gradient (real element, not pseudo) -->
@@ -940,6 +960,14 @@
     <div class="hero-orb hero-orb-1"></div>
     <div class="hero-orb hero-orb-2"></div>
     <div class="hero-orb hero-orb-3"></div>
+
+    <!-- One Drop -->
+    <div class="drop-origin">
+      <div class="drop-dot"></div>
+      <div class="drop-ring drop-ring-1"></div>
+      <div class="drop-ring drop-ring-2"></div>
+      <div class="drop-ring drop-ring-3"></div>
+    </div>
 
     <div class="hero-inner">
       <p class="hero-eyebrow">Global Creative Agency &mdash; Shibuya, Tokyo</p>
