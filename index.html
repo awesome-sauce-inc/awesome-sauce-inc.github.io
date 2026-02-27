@@ -83,6 +83,35 @@
       100% { background-position: 0% 50%; }
     }
 
+    /* Subtle ripple drops — CSS only */
+    .ripple-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(62,179,112,0.12);
+      animation: rippleExpand var(--dur) var(--delay) ease-out infinite;
+      opacity: 0;
+    }
+    .ripple::after {
+      content: '';
+      position: absolute;
+      inset: 10%;
+      border-radius: 50%;
+      border: 1px solid rgba(26,150,213,0.08);
+      animation: rippleExpand calc(var(--dur) * 0.8) calc(var(--delay) + 0.6s) ease-out infinite;
+      opacity: 0;
+    }
+    @keyframes rippleExpand {
+      0%   { transform: scale(0); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 0; }
+    }
+
     /* =====================================================
        SCROLL FADE-IN
     ===================================================== */
@@ -733,6 +762,11 @@
       color: var(--ink-light);
       margin-left: 0.4rem;
     }
+    .contact-link {
+      color: var(--green-dark);
+      transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--green); }
 
     /* =====================================================
        FOOTER
@@ -861,6 +895,17 @@
   </style>
 </head>
 <body>
+
+  <!-- Ripple water-drop effect -->
+  <div class="ripple-layer">
+    <div class="ripple" style="width:280px;height:280px;top:12%;left:8%;--dur:7s;--delay:0s"></div>
+    <div class="ripple" style="width:200px;height:200px;top:45%;right:12%;--dur:9s;--delay:2s"></div>
+    <div class="ripple" style="width:340px;height:340px;bottom:18%;left:55%;--dur:11s;--delay:4s"></div>
+    <div class="ripple" style="width:160px;height:160px;top:70%;left:15%;--dur:8s;--delay:1.5s"></div>
+    <div class="ripple" style="width:240px;height:240px;top:25%;right:25%;--dur:10s;--delay:3.5s"></div>
+    <div class="ripple" style="width:180px;height:180px;bottom:35%;left:35%;--dur:8.5s;--delay:5.5s"></div>
+  </div>
+
 
   <!-- Full-page animated gradient (real element, not pseudo) -->
   <div class="page-gradient"></div>
@@ -1098,7 +1143,7 @@
           AWESOME SAUCE Inc. is based in Shibuya, Tokyo — one of the world's most vibrant creative districts. We flow with the agility of a boutique and the vision of a global creative studio.
         </p>
         <p class="company-intro ja-only">
-          AWESOME SAUCE Inc.は、世界で最も活気あるクリエイティブ地区のひとつ、東京・渋谷に拠点を置いています。ブティックの機動力とグローバルスタジオのビジョンを併せ持ちます。
+          渋谷を拠点に、小さなチームの身軽さとグローバルな視野で動く。それがAWESOME SAUCE Inc.のスタイルです。
         </p>
 
         <div class="company-details">
@@ -1113,6 +1158,10 @@
           <div class="company-detail">
             <span class="company-detail-label">Location</span>
             <span class="company-detail-value">Shibuya, Tokyo</span>
+          </div>
+          <div class="company-detail">
+            <span class="company-detail-label">Contact</span>
+            <span class="company-detail-value"><a id="company-email" class="contact-link"></a></span>
           </div>
         </div>
       </div>
@@ -1147,8 +1196,7 @@
       </div>
       <div class="footer-bottom">
         <p class="footer-copy">&copy; 2026 AWESOME SAUCE Inc.</p>
-        <a href="security.html" class="footer-policy-link en-only">Information Security Policy</a>
-        <a href="security.html" class="footer-policy-link ja-only">情報セキュリティ基本方針</a>
+        <a href="security.html" class="footer-policy-link">Information Security Policy</a>
       </div>
     </div>
   </footer>
@@ -1222,10 +1270,13 @@
 
     // Email obfuscation (anti-spam)
     (function() {
-      var e = document.getElementById('footer-email');
-      if (!e) return;
       var u = 'as', d = 'awesome-sauce.co.jp';
-      e.href = 'mai' + 'lto:' + u + '@' + d;
+      var addr = u + '@' + d;
+      var href = 'mai' + 'lto:' + addr;
+      var fe = document.getElementById('footer-email');
+      if (fe) fe.href = href;
+      var ce = document.getElementById('company-email');
+      if (ce) { ce.href = href; ce.textContent = addr; }
     })();
   </script>
 
