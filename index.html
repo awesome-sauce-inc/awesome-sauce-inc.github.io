@@ -579,118 +579,98 @@
     }
 
     /* =====================================================
-       WORK — 3 random static videos
+       WORK — background video + message overlay
     ===================================================== */
     .work-wrap {
-      background: var(--ink);
-      overflow: hidden;
-    }
-    .work-wrap .section-label { color: var(--green); }
-    .work-wrap .section-title { color: var(--white); }
-
-    .work-header {
-      margin-bottom: 3rem;
-    }
-
-    .video-grid-outer {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-    }
-    .video-cell {
       position: relative;
-      padding-bottom: 56.25%;
-      border-radius: var(--radius-md);
       overflow: hidden;
-      background: #222;
-    }
-    .video-cell iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      pointer-events: none;
-    }
-    .video-cell-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(26,26,26,0.6) 0%, transparent 50%);
-      z-index: 1;
-      pointer-events: none;
-    }
-    .video-cell-info {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 1rem 1.2rem;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .video-cell-client {
-      font-family: var(--font-display);
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 0.2rem;
-    }
-    .video-cell-title {
-      font-family: var(--font-display);
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--white);
-      line-height: 1.3;
-    }
-
-    .work-cta {
+      min-height: 70vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 3rem;
-      gap: 1.5rem;
+    }
+    .work-bg-video {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .work-bg-video iframe {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 177.78vh; /* 16:9 cover */
+      height: 100vh;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      border: none;
+      pointer-events: none;
+    }
+    .work-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.82);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .work-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 640px;
+      padding: 5rem 2rem;
+    }
+    .work-wrap .section-label { color: var(--green); }
+    .work-wrap .section-title { color: var(--ink); }
+    .work-message {
+      font-size: 1rem;
+      color: var(--ink-mid);
+      line-height: 1.85;
+      margin-top: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .work-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
       flex-wrap: wrap;
     }
-    .work-cta-btn {
+    .work-btn-primary {
       font-family: var(--font-display);
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 600;
       letter-spacing: 0.04em;
-      padding: 0.9rem 2.2rem;
+      padding: 0.85rem 2rem;
       border-radius: 100px;
       background: linear-gradient(135deg, var(--green), var(--blue));
       color: var(--white);
       transition: transform 0.2s, box-shadow 0.2s;
       box-shadow: 0 8px 32px rgba(62,179,112,0.25);
     }
-    .work-cta-btn:hover {
+    .work-btn-primary:hover {
       transform: translateY(-2px);
       box-shadow: 0 14px 40px rgba(62,179,112,0.35);
     }
-    .work-cta-vimeo {
+    .work-btn-vimeo {
       font-family: var(--font-display);
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 500;
       letter-spacing: 0.04em;
-      padding: 0.9rem 2.2rem;
+      padding: 0.85rem 2rem;
       border-radius: 100px;
-      border: 1px solid rgba(255,255,255,0.2);
-      color: rgba(255,255,255,0.7);
+      border: 1px solid var(--border);
+      color: var(--ink-light);
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       transition: border-color 0.2s, color 0.2s;
+      background: rgba(255,255,255,0.5);
     }
-    .work-cta-vimeo:hover {
-      border-color: rgba(255,255,255,0.5);
-      color: var(--white);
+    .work-btn-vimeo:hover {
+      border-color: var(--green);
+      color: var(--green);
     }
-    .work-cta-vimeo svg { width: 16px; height: 16px; }
+    .work-btn-vimeo svg { width: 16px; height: 16px; }
 
     /* =====================================================
        COMPANY — card-style (no table)
@@ -841,7 +821,8 @@
       .services-grid { grid-template-columns: 1fr; }
       .services-header { flex-direction: column; align-items: flex-start; }
 
-      .video-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+      .work-wrap { min-height: 50vh; }
+      .work-content { padding: 4rem 1.5rem; }
 
       .company-details { flex-direction: column; gap: 1.5rem; }
     }
@@ -920,10 +901,8 @@
       </p>
 
       <div class="hero-actions">
-        <a href="#work" class="btn-primary en-only">Explore Our Work</a>
-        <a href="#work" class="btn-primary ja-only">実績を見る</a>
-        <a href="#about" class="btn-ghost en-only">Who We Are</a>
-        <a href="#about" class="btn-ghost ja-only">私たちについて</a>
+        <a href="#work" class="btn-primary">Explore Our Work</a>
+        <a href="#about" class="btn-ghost">Who We Are</a>
       </div>
     </div>
     <div class="scroll-hint">
@@ -949,30 +928,30 @@
         The same content, placed in a different context, transforms meaning entirely. AWESOME SAUCE nurtures that context — the field where brands discover their authentic voice. Based in Tokyo, one of the world's most dynamic creative cities, we bring global perspective with local intuition. One drop of the right idea, like one drop of the right sauce, elevates everything it touches.
       </p>
       <p class="about-intro ja-only reveal">
-        同じコンテンツでも、文脈が変われば意味は根本から変わる。AWESOME SAUCEは、その文脈を育むエージェンシーです。世界有数のクリエイティブ都市・東京を拠点に、グローバルな視点とローカルの直感で、ブランドが本来持っている力を引き出す。適切なソースの一滴が料理を変えるように、適切なアイデアの一滴が、すべてを変える。
+        AWESOME SAUCE — 英語のスラングで「めっちゃいいね！」という意味。私たちは、その一滴で全体を変えるような仕事を目指すエージェンシーです。最高のソースのように、ブランドの味を引き立て、本来持っている力を解き放つ。世界有数のクリエイティブ都市・東京を拠点に、グローバルな視点とローカルの直感で、文脈から価値を創造します。
       </p>
 
       <div class="philosophy-grid reveal">
         <div class="philosophy-card">
           <p class="philosophy-num">01</p>
-          <p class="philosophy-title en-only">Context over Content</p>
-          <p class="philosophy-title ja-only">コンテンツより、コンテクスト</p>
-          <p class="philosophy-desc en-only">What you say matters less than where and how it lands.</p>
-          <p class="philosophy-desc ja-only">何を言うかより、どこに届けるか。</p>
+          <p class="philosophy-title en-only">Context is Everything</p>
+          <p class="philosophy-title ja-only">大切なのは、コンテクスト</p>
+          <p class="philosophy-desc en-only">Content is just an ingredient. Context — the intention, the story, the meaning — is the sauce that makes it unforgettable.</p>
+          <p class="philosophy-desc ja-only">コンテンツは素材に過ぎない。文脈・想い・意図 — それこそが、すべてを変える最高のソース。</p>
         </div>
         <div class="philosophy-card">
           <p class="philosophy-num">02</p>
-          <p class="philosophy-title en-only">Power, Not Force</p>
-          <p class="philosophy-title ja-only">力ではなく、パワー</p>
-          <p class="philosophy-desc en-only">True creative power is effortless — it uplifts, aligns, and inspires naturally.</p>
-          <p class="philosophy-desc ja-only">真のクリエイティブは、無理なく高め、調和し、自然と人の心を動かす。</p>
+          <p class="philosophy-title en-only">Play Hard, Love Deep</p>
+          <p class="philosophy-title ja-only">全力で遊べ、深く愛せ</p>
+          <p class="philosophy-desc en-only">Life is too short to play it safe. We create with the energy of play and the heart of love — because that's when the best ideas flow.</p>
+          <p class="philosophy-desc ja-only">人生は短い。遊ぶように全力で、愛をもって創る。そこから最高のアイデアが生まれる。</p>
         </div>
         <div class="philosophy-card">
           <p class="philosophy-num">03</p>
-          <p class="philosophy-title en-only">Quality over Speed</p>
-          <p class="philosophy-title ja-only">速さより、質</p>
-          <p class="philosophy-desc en-only">Every project starts with finding that single, potent drop.</p>
-          <p class="philosophy-desc ja-only">すべてのプロジェクトは、一滴を見つけることから。</p>
+          <p class="philosophy-title en-only">Enrich, Not Extract</p>
+          <p class="philosophy-title ja-only">奪うのではなく、豊かにする</p>
+          <p class="philosophy-desc en-only">We don't chase profit for its own sake. We pursue what's essential — work that enriches everyone it touches and makes the world a little more awesome.</p>
+          <p class="philosophy-desc ja-only">利益のための利益は追わない。本質を追求し、関わるすべての人が豊かになる仕事を。世界をもっと最高に。</p>
         </div>
       </div>
 
@@ -1063,27 +1042,26 @@
   <div class="divider-line"></div>
 
   <!-- ===================================================
-       WORK — 3 random static videos
+       WORK — background video + message
   =================================================== -->
   <section id="work" class="section-wrap work-wrap">
-    <div class="section-inner">
-      <div class="work-header reveal">
-        <p class="section-label">Work</p>
-        <h2 class="section-title en-only">Selected Work</h2>
-        <h2 class="section-title ja-only">実績</h2>
-      </div>
+    <div class="work-bg-video" id="work-bg-video">
+      <!-- 1 random video loaded by JS -->
     </div>
-    <div class="video-grid-outer">
-      <div class="video-grid" id="video-grid">
-        <!-- 3 random videos loaded by JS -->
-      </div>
-    </div>
-    <div class="section-inner">
-
-      <div class="work-cta reveal">
-        <a href="works.html" class="work-cta-btn en-only">View All Works</a>
-        <a href="works.html" class="work-cta-btn ja-only">全作品を見る</a>
-        <a href="https://vimeo.com/awesomesauceinc" target="_blank" rel="noopener" class="work-cta-vimeo">
+    <div class="work-bg-overlay"></div>
+    <div class="work-content reveal">
+      <p class="section-label">Work</p>
+      <h2 class="section-title en-only">Our Work in Motion</h2>
+      <h2 class="section-title ja-only">動き続ける、私たちの仕事</h2>
+      <p class="work-message en-only">
+        From national campaigns to indie passion projects — every piece carries the same care and creative energy. See the full collection on Vimeo, or browse the archive.
+      </p>
+      <p class="work-message ja-only">
+        ナショナルキャンペーンからインディーズまで — すべてのプロジェクトに同じ情熱とクリエイティブを注ぐ。Vimeoで映像を、アーカイブで全作品をご覧ください。
+      </p>
+      <div class="work-actions">
+        <a href="works.html" class="work-btn-primary">View All Works</a>
+        <a href="https://vimeo.com/awesomesauceinc" target="_blank" rel="noopener" class="work-btn-vimeo">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.977 6.416c-.105 2.338-1.739 5.543-4.894 9.609-3.268 4.247-6.026 6.37-8.29 6.37-1.409 0-2.578-1.294-3.553-3.881L5.322 11.4C4.603 8.816 3.834 7.522 3.01 7.522c-.179 0-.806.378-1.881 1.132L0 7.197a315 315 0 0 0 3.501-3.123C5.08 2.701 6.266 1.984 7.055 1.91c1.867-.18 3.016 1.1 3.447 3.838.465 2.953.789 4.789.971 5.507.539 2.45 1.131 3.674 1.776 3.674.502 0 1.256-.796 2.265-2.385 1.004-1.589 1.54-2.797 1.612-3.628.144-1.371-.395-2.061-1.614-2.061-.574 0-1.167.121-1.777.391 1.186-3.868 3.434-5.757 6.762-5.637 2.473.06 3.628 1.664 3.493 4.797l-.013.01z"/></svg>
           Vimeo
         </a>
@@ -1206,50 +1184,24 @@
       });
     })();
 
-    // 3 random static videos (no cycling)
+    // 1 random background video (muted loop)
     (function() {
-      const videos = [
-        { id: '297846874', client: 'NITORI', title: 'Creation!' },
-        { id: '274288506', client: 'SHONAN NO KAZE', title: 'RIVAL' },
-        { id: '225748921', client: 'SMAMOBA', title: 'YOSHIKI RISA PV' },
-        { id: '274288613', client: 'BAND JA NAIMON!', title: 'FAN+TIC' },
-        { id: '274288583', client: 'une nana cool', title: 'MOGAMI MOGA' },
-        { id: '460156480', client: 'TEPCO', title: 'Hakken! FUKUSHIMA vol.3' },
-        { id: '460153289', client: 'TEPCO', title: 'Hakken! FUKUSHIMA vol.2' },
-        { id: '297862726', client: 'TEPCO', title: 'Hakken! FUKUSHIMA vol.1' },
-        { id: '460152877', client: 'Froebel-Kan', title: 'DEKIROUTE 2019' },
-        { id: '460148448', client: 'Sumida Aquarium', title: 'Sumida Aquarium 2019' },
-        { id: '460145562', client: 'Kyoto Aquarium', title: 'Kyoto Aquarium 2019' },
-        { id: '274289204', client: 'EDWIN', title: 'SOMETHING COOL 2017SS' },
-        { id: '274289177', client: 'EDWIN', title: 'JERSEYS 2017SS' },
-        { id: '274289160', client: 'EDWIN', title: 'C17 COOL 2017SS' },
-        { id: '274289143', client: 'EDWIN', title: '503 COOL 2017SS' },
-        { id: '225748494', client: 'SMAMOBA', title: 'IKEDA ELAIZA CM' },
-        { id: '460136096', client: 'Japan Gov.', title: 'Resilient Japan — Kumamoto' },
-        { id: '460136060', client: 'Japan Gov.', title: 'Resilient Japan — Art' },
-        { id: '460135640', client: 'Japan Gov.', title: 'Resilient Japan — Western Portal' },
-        { id: '460134767', client: 'Japan Gov.', title: 'Resilient Japan — Niseko' }
+      const videoIds = [
+        '297846874', '274288506', '225748921', '274288613', '274288583',
+        '460156480', '460153289', '297862726', '460152877', '460148448',
+        '460145562', '274289204', '274289177', '274289160', '274289143',
+        '225748494', '460136096', '460136060', '460135640', '460134767'
       ];
 
-      const container = document.getElementById('video-grid');
+      const container = document.getElementById('work-bg-video');
       if (!container) return;
 
-      // Pick 3 random videos
-      const shuffled = [...videos].sort(() => Math.random() - 0.5);
-      const picked = shuffled.slice(0, 3);
-
-      picked.forEach(v => {
-        const cell = document.createElement('div');
-        cell.className = 'video-cell';
-        cell.innerHTML = `
-          <iframe src="https://player.vimeo.com/video/${v.id}?background=1&autoplay=1&muted=1&loop=1&quality=auto" allow="autoplay" loading="lazy"></iframe>
-          <div class="video-cell-overlay"></div>
-          <div class="video-cell-info">
-            <p class="video-cell-client">${v.client}</p>
-            <p class="video-cell-title">${v.title}</p>
-          </div>`;
-        container.appendChild(cell);
-      });
+      const picked = videoIds[Math.floor(Math.random() * videoIds.length)];
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://player.vimeo.com/video/${picked}?background=1&autoplay=1&muted=1&loop=1&quality=auto`;
+      iframe.allow = 'autoplay';
+      iframe.loading = 'lazy';
+      container.appendChild(iframe);
     })();
   </script>
 
