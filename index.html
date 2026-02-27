@@ -534,6 +534,41 @@
       50% { opacity: 0.5; transform: scale(0.8); }
     }
 
+    /* Philosophy principles inside about-card */
+    .philosophy-principles {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+    .philosophy-item {
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+    .philosophy-num {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 0.06em;
+      min-width: 22px;
+      padding-top: 0.15rem;
+    }
+    .philosophy-title {
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.15rem;
+      letter-spacing: -0.01em;
+    }
+    .philosophy-desc {
+      font-size: 0.82rem;
+      color: var(--ink-light);
+      line-height: 1.6;
+    }
+
     /* =====================================================
        SERVICES
     ===================================================== */
@@ -807,117 +842,7 @@
       margin-left: 0.5rem;
     }
 
-    /* =====================================================
-       SECURITY POLICY — Light card style
-    ===================================================== */
-    .security-wrap {
-      background: var(--white);
-    }
-
-    .security-header {
-      margin-bottom: 3rem;
-    }
-
-    .policy-card {
-      background: linear-gradient(135deg, rgba(62,179,112,0.04) 0%, rgba(26,150,213,0.04) 100%);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 3.5rem 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .policy-card::before {
-      content: '';
-      position: absolute;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--blue) 0%, transparent 70%);
-      opacity: 0.04;
-      bottom: -150px; right: -100px;
-      filter: blur(60px);
-      pointer-events: none;
-    }
-
-    .policy-headline {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--ink);
-      text-align: center;
-      margin-bottom: 2rem;
-      letter-spacing: -0.01em;
-    }
-
-    .policy-intro {
-      font-size: 0.95rem;
-      color: var(--ink-light);
-      line-height: 1.85;
-      text-align: left;
-      margin-bottom: 2.5rem;
-      padding-bottom: 2.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .policy-items {
-      display: flex;
-      flex-direction: column;
-      gap: 1.75rem;
-    }
-
-    .policy-item {
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 1.2rem;
-      align-items: start;
-    }
-    .policy-item-num {
-      width: 48px; height: 48px;
-      border-radius: var(--radius-sm);
-      background: linear-gradient(135deg, rgba(62,179,112,0.12), rgba(26,150,213,0.12));
-      border: 1px solid rgba(62,179,112,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--green);
-      flex-shrink: 0;
-    }
-    .policy-item-title {
-      font-family: var(--font-display);
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 0.35rem;
-    }
-    .policy-item-body {
-      font-size: 0.9rem;
-      color: var(--ink-light);
-      line-height: 1.8;
-    }
-
-    .policy-meta {
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-end;
-      flex-direction: column;
-      gap: 0.25rem;
-      text-align: right;
-    }
-    .policy-meta-date {
-      font-size: 0.82rem;
-      color: var(--ink-faint);
-      font-family: var(--font-display);
-      letter-spacing: 0.04em;
-    }
-    .policy-meta-name {
-      font-size: 0.88rem;
-      color: var(--ink-mid);
-    }
+    /* Security policy styles moved to security.html */
 
     /* =====================================================
        FOOTER — Light
@@ -979,12 +904,29 @@
       display: flex;
     }
     .footer-social a:hover { color: var(--green); }
+    .footer-bottom {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+      margin-top: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
     .footer-copy {
       font-size: 0.78rem;
       color: var(--ink-faint);
       font-family: var(--font-display);
       letter-spacing: 0.04em;
     }
+    .footer-policy-link {
+      font-size: 0.72rem;
+      color: var(--ink-faint);
+      font-family: var(--font-display);
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .footer-policy-link:hover { color: var(--green); }
 
     /* =====================================================
        RESPONSIVE
@@ -1003,8 +945,6 @@
 
       .company-layout { grid-template-columns: 1fr; gap: 2.5rem; }
       .company-intro { max-width: 100%; }
-
-      .policy-card { padding: 2.5rem 2rem; }
     }
 
     @media (max-width: 600px) {
@@ -1021,6 +961,7 @@
 
       .footer-inner { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
       .footer-links { flex-direction: column; gap: 0.8rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
     }
 
     /* Thin line accent divider */
@@ -1045,7 +986,6 @@
       <a href="#services">Services</a>
       <a href="#work">Work</a>
       <a href="#company">Company</a>
-      <a href="#security">Security</a>
       <button class="lang-switch" onclick="toggleLang()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         <span id="lang-label">JA</span>
@@ -1109,21 +1049,21 @@
 
         <div class="about-left reveal">
           <p class="section-label">About</p>
-          <h2 class="section-title en-only">Where a single drop<br>changes everything.</h2>
-          <h2 class="section-title ja-only">一滴が、<br>すべてを変える。</h2>
+          <h2 class="section-title en-only">We don't make ads.<br>We create context.</h2>
+          <h2 class="section-title ja-only">広告をつくるのではない。<br>文脈をつくる。</h2>
 
           <p class="about-body en-only">
-            AWESOME SAUCE Inc. is an independent global creative agency based in Shibuya, Tokyo. We partner with brands to build campaigns that resonate — blending sharp strategy, fearless creative, and precise digital execution.
+            The same content, placed in a different context, changes meaning fundamentally. AWESOME SAUCE is the agency that designs that context — the invisible field where brands find their true voice.
           </p>
           <p class="about-body en-only" style="margin-top:1rem;">
-            Our name says it all: the right idea, like the right sauce, elevates everything around it.
+            One drop of the right idea, like one drop of the right sauce, elevates everything it touches.
           </p>
 
           <p class="about-body ja-only">
-            AWESOME SAUCE Inc.は、東京・渋谷を拠点とするグローバル・クリエイティブエージェンシーです。鋭い戦略、大胆なクリエイティブ、精緻なデジタル施策を融合し、ブランドと共に心に響くキャンペーンを創造します。
+            同じコンテンツでも、文脈が変われば意味は根本的に変わる。AWESOME SAUCEは、その文脈をデザインするエージェンシーです。ブランドが本当の声を見つける、目に見えない場を設計します。
           </p>
           <p class="about-body ja-only" style="margin-top:1rem;">
-            適切なアイデアは、適切なソースのように、周囲のすべてを引き立てます。
+            適切なアイデアの一滴は、適切なソースの一滴のように、触れるものすべてを引き立てます。
           </p>
 
           <div class="about-stat-row">
@@ -1144,17 +1084,48 @@
 
         <div class="about-right reveal">
           <div class="about-card">
-            <p class="about-card-tag en-only">Our Philosophy</p>
+            <p class="about-card-tag en-only">Philosophy</p>
             <p class="about-card-tag ja-only">フィロソフィー</p>
 
-            <h3 class="about-card-title">The A+&#38627; Principle</h3>
+            <h3 class="about-card-title en-only">The A+&#38627; Principle</h3>
+            <h3 class="about-card-title ja-only">A+雫の原理</h3>
 
             <p class="about-card-body en-only">
-              The droplet (&#38627;) in our logo is not decoration — it is intent. One concentrated idea, perfectly applied, can redefine a brand. We don't overwhelm; we distill. Every project begins with finding that single, potent drop.
+              The droplet in our logo is not decoration — it is intent. One concentrated drop of creative synergy, perfectly applied, redefines a brand. We believe in three principles:
             </p>
             <p class="about-card-body ja-only">
-              ロゴに込められた雫は、装飾ではなく、意志。一滴の凝縮されたアイデアを的確に注げば、ブランドは生まれ変わります。圧倒するのではなく、蒸留する。全てのプロジェクトは、その一滴を見つけることから始まります。
+              ロゴに込められた雫は、装飾ではなく、意志です。一滴の凝縮されたクリエイティブ・シナジーが、ブランドを生まれ変わらせます。私たちの3つの原理:
             </p>
+
+            <div class="philosophy-principles">
+              <div class="philosophy-item">
+                <span class="philosophy-num">01</span>
+                <div>
+                  <p class="philosophy-title en-only">Context over Content</p>
+                  <p class="philosophy-title ja-only">コンテンツより、コンテクスト</p>
+                  <p class="philosophy-desc en-only">Meaning lives not in what is said, but in the field where it is heard.</p>
+                  <p class="philosophy-desc ja-only">意味は語られる言葉にではなく、それが聴かれる場に宿る。</p>
+                </div>
+              </div>
+              <div class="philosophy-item">
+                <span class="philosophy-num">02</span>
+                <div>
+                  <p class="philosophy-title en-only">Power over Force</p>
+                  <p class="philosophy-title ja-only">力ではなく、威力</p>
+                  <p class="philosophy-desc en-only">We don't overwhelm — we distill. True influence invites, never pushes.</p>
+                  <p class="philosophy-desc ja-only">圧倒するのではなく、蒸留する。本物の影響力は、招くものであり、押すものではない。</p>
+                </div>
+              </div>
+              <div class="philosophy-item">
+                <span class="philosophy-num">03</span>
+                <div>
+                  <p class="philosophy-title en-only">Quality over Speed</p>
+                  <p class="philosophy-title ja-only">速さより、質</p>
+                  <p class="philosophy-desc en-only">Every project begins with finding that single, potent drop — no shortcuts.</p>
+                  <p class="philosophy-desc ja-only">全てのプロジェクトは、一滴を見つけることから。近道はない。</p>
+                </div>
+              </div>
+            </div>
 
             <span class="about-card-pill en-only">
               <span class="about-card-pill-dot"></span>
@@ -1337,78 +1308,6 @@
 
 
   <!-- ===================================================
-       SECURITY POLICY
-  =================================================== -->
-  <section id="security" class="section-wrap security-wrap">
-    <div class="section-inner">
-      <div class="security-header reveal">
-        <p class="section-label">Information Security</p>
-        <h2 class="section-title">Information Security Policy</h2>
-        <h2 class="section-title" style="font-size: clamp(1.4rem, 3vw, 2rem); margin-top: 0.5rem; color: var(--ink-light);">情報セキュリティ基本方針</h2>
-      </div>
-
-      <div class="policy-card reveal">
-        <h3 class="policy-headline">情報セキュリティ基本方針</h3>
-
-        <p class="policy-intro">
-          AWESOME SAUCE Inc.（以下、当社）は、お客様からお預かりした情報資産を事故・災害・犯罪などの脅威から守り、お客様ならびに社会の信頼に応えるべく、以下の方針に基づき全社で情報セキュリティに取り組みます。
-        </p>
-
-        <div class="policy-items">
-
-          <div class="policy-item">
-            <div class="policy-item-num">1</div>
-            <div class="policy-item-content">
-              <p class="policy-item-title">経営者の責任</p>
-              <p class="policy-item-body">当社は、経営者主導で組織的かつ継続的に情報セキュリティの改善・向上に努めます。</p>
-            </div>
-          </div>
-
-          <div class="policy-item">
-            <div class="policy-item-num">2</div>
-            <div class="policy-item-content">
-              <p class="policy-item-title">社内体制の整備</p>
-              <p class="policy-item-body">当社は、情報セキュリティの維持及び改善のために組織を設置し、情報セキュリティ対策を社内の正式な規則として定めます。</p>
-            </div>
-          </div>
-
-          <div class="policy-item">
-            <div class="policy-item-num">3</div>
-            <div class="policy-item-content">
-              <p class="policy-item-title">従業員の取組み</p>
-              <p class="policy-item-body">当社の従業員は、情報セキュリティのために必要とされる知識、技術を習得し、情報セキュリティへの取り組みを確かなものにします。</p>
-            </div>
-          </div>
-
-          <div class="policy-item">
-            <div class="policy-item-num">4</div>
-            <div class="policy-item-content">
-              <p class="policy-item-title">法令及び契約上の要求事項の遵守</p>
-              <p class="policy-item-body">当社は、情報セキュリティに関わる法令、規制、規範、契約上の義務を遵守するとともに、お客様の期待に応えます。</p>
-            </div>
-          </div>
-
-          <div class="policy-item">
-            <div class="policy-item-num">5</div>
-            <div class="policy-item-content">
-              <p class="policy-item-title">違反及び事故への対応</p>
-              <p class="policy-item-body">当社は、情報セキュリティに関わる法令違反、契約違反及び事故が発生した場合には適切に対処し、再発防止に努めます。</p>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="policy-meta">
-          <p class="policy-meta-date">制定日: 2026年2月27日</p>
-          <p class="policy-meta-name">AWESOME SAUCE Inc. — Aoi Tairako / 平子葵</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ===================================================
        FOOTER — Light
   =================================================== -->
   <footer class="site-footer">
@@ -1422,7 +1321,6 @@
         <a href="#services">Services</a>
         <a href="#work">Work</a>
         <a href="#company">Company</a>
-        <a href="#security">Security Policy</a>
       </nav>
       <div class="footer-social">
         <a href="https://vimeo.com/awesomesauceinc" target="_blank" rel="noopener" aria-label="Vimeo">
@@ -1432,7 +1330,11 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
         </a>
       </div>
-      <p class="footer-copy">&copy; 2026 AWESOME SAUCE Inc.</p>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 AWESOME SAUCE Inc.</p>
+        <a href="security.html" class="footer-policy-link en-only">Information Security Policy</a>
+        <a href="security.html" class="footer-policy-link ja-only">情報セキュリティ基本方針</a>
+      </div>
     </div>
   </footer>
 

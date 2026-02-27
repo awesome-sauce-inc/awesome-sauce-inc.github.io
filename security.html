@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Information Security Policy — AWESOME SAUCE Inc.</title>
+  <meta name="description" content="Information Security Policy of AWESOME SAUCE Inc. 情報セキュリティ基本方針">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green:       #3EB370;
+      --blue:        #1A96D5;
+      --green-light: #e8f7ef;
+      --blue-light:  #e3f1fa;
+      --green-dark:  #2d9459;
+      --ink:         #1a1a1a;
+      --ink-mid:     #444444;
+      --ink-light:   #777777;
+      --ink-faint:   #b0b0b0;
+      --surface:     #f7f8f6;
+      --white:       #ffffff;
+      --border:      #e8e8e6;
+      --font-body:   'Inter', system-ui, sans-serif;
+      --font-display:'Space Grotesk', system-ui, sans-serif;
+      --radius-sm:   6px;
+      --radius-md:   14px;
+      --radius-lg:   28px;
+      --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--ink-mid);
+      background: var(--white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* Language */
+    [lang="en"] .ja-only { display: none !important; }
+    [lang="ja"] .en-only { display: none !important; }
+
+    .lang-switch {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.4rem 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .lang-switch:hover { border-color: var(--green); color: var(--green); }
+
+    /* Header */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 0.75rem; }
+    .logo-wrap img { height: 38px; width: auto; }
+    .site-nav { display: flex; align-items: center; gap: 2rem; }
+    .site-nav a {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      transition: color 0.2s;
+    }
+    .site-nav a:hover { color: var(--ink); }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--ink); border-radius: 2px;
+    }
+
+    /* Page content */
+    .page-content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 10rem 2rem 6rem;
+    }
+
+    .page-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 3rem;
+      transition: color 0.2s;
+    }
+    .page-back:hover { color: var(--green); }
+    .page-back svg { width: 16px; height: 16px; }
+
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .page-subtitle {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 600;
+      color: var(--ink-light);
+      margin-top: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* Policy card */
+    .policy-card {
+      margin-top: 3rem;
+      background: linear-gradient(135deg, rgba(62,179,112,0.04) 0%, rgba(26,150,213,0.04) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .policy-card::before {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--blue) 0%, transparent 70%);
+      opacity: 0.04;
+      bottom: -120px; right: -80px;
+      filter: blur(60px);
+      pointer-events: none;
+    }
+
+    .policy-intro {
+      font-size: 0.95rem;
+      color: var(--ink-light);
+      line-height: 1.85;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+    .policy-item {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+    .policy-item-num {
+      width: 44px; height: 44px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, rgba(62,179,112,0.12), rgba(26,150,213,0.12));
+      border: 1px solid rgba(62,179,112,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--green);
+      flex-shrink: 0;
+    }
+    .policy-item-title {
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+    .policy-item-body {
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      line-height: 1.8;
+    }
+
+    .policy-meta {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      flex-direction: column;
+      gap: 0.25rem;
+      text-align: right;
+    }
+    .policy-meta-date {
+      font-size: 0.82rem;
+      color: var(--ink-faint);
+      font-family: var(--font-display);
+      letter-spacing: 0.04em;
+    }
+    .policy-meta-name {
+      font-size: 0.88rem;
+      color: var(--ink-mid);
+    }
+
+    /* Footer */
+    .site-footer {
+      background: var(--surface);
+      color: var(--ink-light);
+      padding: 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 0.75rem; }
+    .footer-logo img { height: 28px; width: auto; opacity: 0.7; }
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--ink-faint);
+      font-family: var(--font-display);
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 900px) {
+      .site-header { padding: 1rem 1.5rem; }
+      .site-nav { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 600px) {
+      .page-content { padding: 8rem 1.5rem 4rem; }
+      .policy-card { padding: 2rem 1.5rem; }
+      .policy-item { grid-template-columns: 36px 1fr; gap: 0.8rem; }
+      .policy-item-num { width: 36px; height: 36px; font-size: 0.78rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="logo-wrap">
+      <img src="images/logo_v2_clean.png" alt="AWESOME SAUCE Inc.">
+    </a>
+    <nav class="site-nav">
+      <a href="index.html#about">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="works.html">Work</a>
+      <a href="index.html#company">Company</a>
+      <button class="lang-switch" onclick="toggleLang()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span id="lang-label">JA</span>
+      </button>
+    </nav>
+    <button class="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main class="page-content">
+    <a href="index.html" class="page-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      <span class="en-only">Back to Home</span>
+      <span class="ja-only">トップへ戻る</span>
+    </a>
+
+    <p class="section-label">Information Security</p>
+    <h1 class="page-title">Information Security Policy</h1>
+    <p class="page-subtitle">情報セキュリティ基本方針</p>
+
+    <div class="policy-card">
+      <p class="policy-intro">
+        AWESOME SAUCE Inc.（以下、当社）は、お客様からお預かりした情報資産を事故・災害・犯罪などの脅威から守り、お客様ならびに社会の信頼に応えるべく、以下の方針に基づき全社で情報セキュリティに取り組みます。
+      </p>
+
+      <div class="policy-items">
+        <div class="policy-item">
+          <div class="policy-item-num">1</div>
+          <div class="policy-item-content">
+            <p class="policy-item-title">経営者の責任</p>
+            <p class="policy-item-body">当社は、経営者主導で組織的かつ継続的に情報セキュリティの改善・向上に努めます。</p>
+          </div>
+        </div>
+
+        <div class="policy-item">
+          <div class="policy-item-num">2</div>
+          <div class="policy-item-content">
+            <p class="policy-item-title">社内体制の整備</p>
+            <p class="policy-item-body">当社は、情報セキュリティの維持及び改善のために組織を設置し、情報セキュリティ対策を社内の正式な規則として定めます。</p>
+          </div>
+        </div>
+
+        <div class="policy-item">
+          <div class="policy-item-num">3</div>
+          <div class="policy-item-content">
+            <p class="policy-item-title">従業員の取組み</p>
+            <p class="policy-item-body">当社の従業員は、情報セキュリティのために必要とされる知識、技術を習得し、情報セキュリティへの取り組みを確かなものにします。</p>
+          </div>
+        </div>
+
+        <div class="policy-item">
+          <div class="policy-item-num">4</div>
+          <div class="policy-item-content">
+            <p class="policy-item-title">法令及び契約上の要求事項の遵守</p>
+            <p class="policy-item-body">当社は、情報セキュリティに関わる法令、規制、規範、契約上の義務を遵守するとともに、お客様の期待に応えます。</p>
+          </div>
+        </div>
+
+        <div class="policy-item">
+          <div class="policy-item-num">5</div>
+          <div class="policy-item-content">
+            <p class="policy-item-title">違反及び事故への対応</p>
+            <p class="policy-item-body">当社は、情報セキュリティに関わる法令違反、契約違反及び事故が発生した場合には適切に対処し、再発防止に努めます。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="policy-meta">
+        <p class="policy-meta-date">制定日: 2026年2月27日</p>
+        <p class="policy-meta-name">AWESOME SAUCE Inc. — Aoi Tairako / 平子葵</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">
+        <img src="images/logo_v2_clean.png" alt="AWESOME SAUCE Inc.">
+        <span class="footer-brand">AWESOME SAUCE Inc.</span>
+      </a>
+      <p class="footer-copy">&copy; 2026 AWESOME SAUCE Inc.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleLang() {
+      const html = document.documentElement;
+      const label = document.getElementById('lang-label');
+      if (html.lang === 'en') {
+        html.lang = 'ja';
+        label.textContent = 'EN';
+      } else {
+        html.lang = 'en';
+        label.textContent = 'JA';
+      }
+    }
+  </script>
+
+</body>
+</html>

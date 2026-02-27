@@ -344,12 +344,29 @@
       text-transform: uppercase;
       color: var(--ink-faint);
     }
+    .footer-bottom {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+      margin-top: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
     .footer-copy {
       font-size: 0.78rem;
       color: var(--ink-faint);
       font-family: var(--font-display);
       letter-spacing: 0.04em;
     }
+    .footer-policy-link {
+      font-size: 0.72rem;
+      color: var(--ink-faint);
+      font-family: var(--font-display);
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .footer-policy-link:hover { color: var(--green); }
 
     /* Responsive */
     @media (max-width: 900px) {
@@ -374,7 +391,6 @@
       <a href="index.html#services">Services</a>
       <a href="works.html" class="active">Work</a>
       <a href="index.html#company">Company</a>
-      <a href="index.html#security">Security</a>
       <button class="lang-switch" onclick="toggleLang()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         <span id="lang-label">JA</span>
@@ -688,7 +704,11 @@
         <img src="images/logo_v2_clean.png" alt="AWESOME SAUCE Inc.">
         <span class="footer-brand">AWESOME SAUCE Inc.</span>
       </a>
-      <p class="footer-copy">&copy; 2026 AWESOME SAUCE Inc.</p>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 AWESOME SAUCE Inc.</p>
+        <a href="security.html" class="footer-policy-link en-only">Information Security Policy</a>
+        <a href="security.html" class="footer-policy-link ja-only">情報セキュリティ基本方針</a>
+      </div>
     </div>
   </footer>
 
