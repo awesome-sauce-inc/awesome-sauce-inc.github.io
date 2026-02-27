@@ -321,9 +321,6 @@
     }
 
     .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
       font-family: var(--font-display);
       font-size: 0.75rem;
       font-weight: 600;
@@ -331,16 +328,16 @@
       text-transform: uppercase;
       color: var(--green);
       margin-bottom: 2rem;
+      line-height: 1.8;
       opacity: 0;
       animation: fadeUp 0.8s 0.2s var(--ease-out) forwards;
     }
-    .hero-eyebrow::before,
-    .hero-eyebrow::after {
-      content: '';
+    .hero-eyebrow-sub {
       display: block;
-      width: 32px; height: 1px;
-      background: var(--green);
-      opacity: 0.6;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
     }
 
     .hero-title {
@@ -465,10 +462,10 @@
     .section-wrap {
       position: relative;
       z-index: 1;
-      padding: 7rem 2rem;
+      padding: 8rem 2rem;
     }
     .section-inner {
-      max-width: 1060px;
+      max-width: 1080px;
       margin: 0 auto;
     }
 
@@ -479,16 +476,16 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--green);
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.4rem;
     }
 
     .section-title {
       font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
       font-weight: 700;
       color: var(--ink);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
     }
 
     /* =====================================================
@@ -499,11 +496,11 @@
     }
 
     .about-intro {
-      margin-top: 2rem;
-      font-size: 1.05rem;
-      line-height: 1.85;
-      color: var(--ink-light);
-      max-width: 680px;
+      margin-top: 2.5rem;
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: var(--ink-mid);
+      max-width: 740px;
     }
 
     /* Philosophy principles */
@@ -511,13 +508,13 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
-      margin-top: 3.5rem;
+      margin-top: 4rem;
     }
     .philosophy-card {
       background: linear-gradient(135deg, rgba(62,179,112,0.04), rgba(26,150,213,0.04));
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 2rem;
+      padding: 2.4rem;
       transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
     }
     .philosophy-card:hover {
@@ -526,24 +523,25 @@
     }
     .philosophy-num {
       font-family: var(--font-display);
-      font-size: 0.68rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: var(--green);
       letter-spacing: 0.06em;
-      margin-bottom: 0.8rem;
+      margin-bottom: 1rem;
     }
     .philosophy-title {
       font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: 1.15rem;
+      font-weight: 700;
       color: var(--ink);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.6rem;
       letter-spacing: -0.01em;
+      line-height: 1.3;
     }
     .philosophy-desc {
-      font-size: 0.85rem;
-      color: var(--ink-light);
-      line-height: 1.65;
+      font-size: 0.92rem;
+      color: var(--ink-mid);
+      line-height: 1.75;
     }
 
     /* =====================================================
@@ -557,7 +555,7 @@
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      margin-bottom: 4rem;
+      margin-bottom: 3.5rem;
       flex-wrap: wrap;
       gap: 1.5rem;
     }
@@ -571,7 +569,7 @@
     .service-card {
       background: rgba(255,255,255,0.85);
       border-radius: var(--radius-md);
-      padding: 2.8rem 2.4rem;
+      padding: 2.8rem 2.6rem;
       border: 1px solid var(--border);
       transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s;
       position: relative;
@@ -607,26 +605,26 @@
 
     .service-number {
       font-family: var(--font-display);
-      font-size: 0.68rem;
+      font-size: 0.7rem;
       font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--ink-faint);
-      margin-bottom: 0.7rem;
+      margin-bottom: 0.8rem;
     }
     .service-title {
       font-family: var(--font-display);
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: var(--ink);
-      margin-bottom: 0.8rem;
+      margin-bottom: 1rem;
       letter-spacing: -0.01em;
       line-height: 1.3;
     }
     .service-desc {
-      font-size: 0.9rem;
-      color: var(--ink-light);
-      line-height: 1.75;
+      font-size: 0.95rem;
+      color: var(--ink-mid);
+      line-height: 1.8;
     }
     .service-tag-row {
       display: flex;
@@ -636,11 +634,11 @@
     }
     .tag {
       font-family: var(--font-display);
-      font-size: 0.68rem;
+      font-size: 0.72rem;
       font-weight: 500;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      padding: 0.3rem 0.75rem;
+      padding: 0.35rem 0.85rem;
       border-radius: 100px;
       background: var(--surface);
       color: var(--ink-light);
@@ -685,17 +683,17 @@
       position: relative;
       z-index: 2;
       text-align: center;
-      max-width: 640px;
+      max-width: 680px;
       padding: 5rem 2rem;
     }
     .work-wrap .section-label { color: var(--green); }
     .work-wrap .section-title { color: var(--ink); }
     .work-message {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: var(--ink-mid);
       line-height: 1.85;
-      margin-top: 1.5rem;
-      margin-bottom: 2.5rem;
+      margin-top: 1.8rem;
+      margin-bottom: 2.8rem;
     }
     .work-actions {
       display: flex;
@@ -750,27 +748,27 @@
 
     .company-content {
       margin-top: 3rem;
-      max-width: 720px;
+      max-width: 760px;
     }
     .company-intro {
-      font-size: 0.95rem;
-      color: var(--ink-light);
+      font-size: 1.1rem;
+      color: var(--ink-mid);
       line-height: 1.85;
     }
     .company-details {
       display: flex;
-      gap: 2rem;
-      margin-top: 2.5rem;
+      gap: 2.5rem;
+      margin-top: 3rem;
       flex-wrap: wrap;
     }
     .company-detail {
       display: flex;
       flex-direction: column;
-      gap: 0.3rem;
+      gap: 0.4rem;
     }
     .company-detail-label {
       font-family: var(--font-display);
-      font-size: 0.68rem;
+      font-size: 0.72rem;
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -778,14 +776,14 @@
     }
     .company-detail-value {
       font-family: var(--font-display);
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 600;
       color: var(--ink);
       letter-spacing: -0.01em;
     }
     .company-detail-value .ja {
       font-weight: 400;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--ink-light);
       margin-left: 0.4rem;
     }
@@ -902,9 +900,27 @@
     }
 
     @media (max-width: 600px) {
-      .section-wrap { padding: 5rem 1.5rem; }
+      .section-wrap { padding: 5.5rem 1.5rem; }
       .hero { padding: 7rem 1.5rem 5rem; }
+      .hero-eyebrow { font-size: 0.68rem; letter-spacing: 0.14em; margin-bottom: 1.5rem; }
+      .hero-eyebrow-sub { font-size: 0.62rem; }
       .hero-title { font-size: clamp(2.4rem, 11vw, 4rem); white-space: normal; }
+      .hero-sub { font-size: 0.95rem; max-width: 90%; }
+      .hero-actions { flex-direction: column; align-items: center; gap: 0.8rem; }
+      .btn-primary, .btn-ghost { width: 100%; max-width: 280px; text-align: center; }
+      .about-intro { font-size: 1.05rem; }
+      .philosophy-title { font-size: 1.05rem; }
+      .philosophy-desc { font-size: 0.88rem; }
+      .philosophy-card { padding: 1.8rem; }
+      .service-card { padding: 2rem 1.8rem; }
+      .service-title { font-size: 1.15rem; }
+      .service-desc { font-size: 0.92rem; }
+      .service-tag-row { gap: 0.4rem; }
+      .tag { font-size: 0.66rem; padding: 0.28rem 0.65rem; }
+      .work-message { font-size: 1rem; }
+      .work-actions { flex-direction: column; align-items: center; gap: 0.8rem; }
+      .work-btn-primary, .work-btn-vimeo { width: 100%; max-width: 280px; text-align: center; justify-content: center; }
+      .company-intro { font-size: 1rem; }
 
       .footer-inner { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
       .footer-links { flex-direction: column; gap: 0.8rem; }
@@ -966,7 +982,7 @@
     </div>
 
     <div class="hero-inner">
-      <p class="hero-eyebrow">Global Creative Agency &mdash; Shibuya, Tokyo</p>
+      <p class="hero-eyebrow">Global Creative Agency<span class="hero-eyebrow-sub">Shibuya, Tokyo</span></p>
 
       <h1 class="hero-title en-only">
         <span class="accent">One Drop.</span>
