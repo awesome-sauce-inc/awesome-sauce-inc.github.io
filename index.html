@@ -46,24 +46,26 @@
     *, *::before, *::after {
       margin: 0; padding: 0; box-sizing: border-box;
     }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; background: var(--white); }
     body {
       font-family: var(--font-body);
       color: var(--ink-mid);
-      background: var(--white);
+      background: transparent;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
-      position: relative;
     }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
 
-    /* Full-page animated gradient background */
-    body::before {
-      content: '';
+    /* =====================================================
+       FULL-PAGE ANIMATED GRADIENT
+    ===================================================== */
+    .page-gradient {
       position: fixed;
       inset: 0;
-      z-index: -1;
-      opacity: 0.12;
+      z-index: 0;
+      opacity: 0.15;
       background: linear-gradient(135deg,
         #3EB370 0%,
         #1A96D5 25%,
@@ -75,8 +77,11 @@
       animation: gradientShift 15s ease infinite;
       pointer-events: none;
     }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
     /* =====================================================
        SCROLL FADE-IN
@@ -133,7 +138,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 1.2rem 3rem;
-      background: rgba(255,255,255,0.88);
+      background: rgba(255,255,255,0.82);
       backdrop-filter: blur(16px) saturate(180%);
       -webkit-backdrop-filter: blur(16px) saturate(180%);
       border-bottom: 1px solid rgba(0,0,0,0.06);
@@ -146,7 +151,7 @@
       gap: 0.75rem;
     }
     .logo-wrap img {
-      height: 52px;
+      height: 68px;
       width: auto;
     }
 
@@ -202,9 +207,11 @@
     }
 
     /* =====================================================
-       HERO — LIGHT with animated gradient (pagedrop-inspired)
+       HERO
     ===================================================== */
     .hero {
+      position: relative;
+      z-index: 1;
       min-height: 100svh;
       display: flex;
       flex-direction: column;
@@ -212,14 +219,7 @@
       justify-content: center;
       text-align: center;
       padding: 8rem 2rem 6rem;
-      position: relative;
       overflow: hidden;
-    }
-
-    @keyframes gradientShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     /* Soft luminous orbs */
@@ -297,6 +297,7 @@
       margin-bottom: 2rem;
       opacity: 0;
       animation: fadeUp 0.8s 0.4s var(--ease-out) forwards;
+      white-space: nowrap;
     }
 
     .hero-title .accent {
@@ -362,8 +363,8 @@
     .scroll-hint {
       position: absolute;
       bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
+      right: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -393,6 +394,8 @@
        SECTION COMMONS
     ===================================================== */
     .section-wrap {
+      position: relative;
+      z-index: 1;
       padding: 7rem 2rem;
     }
     .section-inner {
@@ -420,134 +423,37 @@
     }
 
     /* =====================================================
-       ABOUT
+       ABOUT — unified (About + Philosophy merged)
     ===================================================== */
     .about-wrap {
-      background: rgba(255,255,255,0.75);
+      background: rgba(255,255,255,0.7);
     }
 
-    .about-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: center;
-    }
-
-    .about-body {
+    .about-intro {
       margin-top: 2rem;
       font-size: 1.05rem;
-      line-height: 1.8;
+      line-height: 1.85;
       color: var(--ink-light);
-      max-width: 440px;
+      max-width: 680px;
     }
 
-    .about-stat-row {
-      display: flex;
-      gap: 3rem;
-      margin-top: 3rem;
+    /* Philosophy principles */
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
     }
-    .stat {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-    .stat-number {
-      font-family: var(--font-display);
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--ink);
-      line-height: 1;
-      letter-spacing: -0.03em;
-    }
-    .stat-label {
-      font-size: 0.8rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      font-family: var(--font-display);
-    }
-
-    .about-right {
-      position: relative;
-    }
-    .about-card {
-      background: linear-gradient(135deg, var(--green-light), var(--blue-light));
-      border-radius: var(--radius-lg);
-      padding: 3rem;
-      color: var(--ink);
-      position: relative;
-      overflow: hidden;
+    .philosophy-card {
+      background: linear-gradient(135deg, rgba(62,179,112,0.04), rgba(26,150,213,0.04));
       border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
     }
-    .about-card::before {
-      content: '';
-      position: absolute;
-      width: 280px; height: 280px;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--green) 0%, transparent 70%);
-      opacity: 0.1;
-      top: -80px; right: -80px;
-      filter: blur(40px);
-    }
-    .about-card-tag {
-      font-family: var(--font-display);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 1.2rem;
-    }
-    .about-card-title {
-      font-family: var(--font-display);
-      font-size: 1.7rem;
-      font-weight: 700;
-      line-height: 1.25;
-      margin-bottom: 1rem;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-    }
-    .about-card-body {
-      font-size: 0.92rem;
-      color: var(--ink-light);
-      line-height: 1.75;
-    }
-    .about-card-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 2rem;
-      background: rgba(62,179,112,0.08);
-      border: 1px solid rgba(62,179,112,0.2);
-      border-radius: 100px;
-      padding: 0.5rem 1rem;
-      font-size: 0.78rem;
-      color: var(--green-dark);
-      font-family: var(--font-display);
-      letter-spacing: 0.04em;
-    }
-    .about-card-pill-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--green);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
-
-    /* Philosophy principles inside about-card */
-    .philosophy-principles {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      margin-top: 1.5rem;
-    }
-    .philosophy-item {
-      display: flex;
-      gap: 0.9rem;
-      align-items: flex-start;
+    .philosophy-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.06);
     }
     .philosophy-num {
       font-family: var(--font-display);
@@ -555,28 +461,27 @@
       font-weight: 700;
       color: var(--green);
       letter-spacing: 0.06em;
-      min-width: 22px;
-      padding-top: 0.15rem;
+      margin-bottom: 0.8rem;
     }
     .philosophy-title {
       font-family: var(--font-display);
-      font-size: 0.88rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--ink);
-      margin-bottom: 0.15rem;
+      margin-bottom: 0.4rem;
       letter-spacing: -0.01em;
     }
     .philosophy-desc {
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       color: var(--ink-light);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     /* =====================================================
        SERVICES
     ===================================================== */
     .services-wrap {
-      background: rgba(247,248,246,0.8);
+      background: rgba(247,248,246,0.75);
     }
 
     .services-header {
@@ -595,7 +500,7 @@
     }
 
     .service-card {
-      background: var(--white);
+      background: rgba(255,255,255,0.85);
       border-radius: var(--radius-md);
       padding: 2.8rem 2.4rem;
       border: 1px solid var(--border);
@@ -674,7 +579,7 @@
     }
 
     /* =====================================================
-       WORK — Autoplay video showcase
+       WORK — 3 random static videos
     ===================================================== */
     .work-wrap {
       background: var(--ink);
@@ -687,114 +592,60 @@
       margin-bottom: 3rem;
     }
 
-    /* Featured video — single large cell */
-    .video-featured-outer {
-      max-width: 1200px;
+    .video-grid-outer {
+      max-width: 1400px;
       margin: 0 auto;
       padding: 0 1.5rem;
     }
-    .video-featured {
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+    .video-cell {
       position: relative;
       padding-bottom: 56.25%;
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-md);
       overflow: hidden;
-      background: #111;
-      margin-top: 2rem;
+      background: #222;
     }
-    .video-featured iframe {
+    .video-cell iframe {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       border: none;
       pointer-events: none;
-      transition: opacity 1s ease;
     }
-    .video-featured iframe.fade-out {
-      opacity: 0;
-    }
-    .video-featured-overlay {
+    .video-cell-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(26,26,26,0.7) 0%, transparent 40%);
+      background: linear-gradient(to top, rgba(26,26,26,0.6) 0%, transparent 50%);
       z-index: 1;
       pointer-events: none;
     }
-    .video-featured-info {
+    .video-cell-info {
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      padding: 2rem 2.5rem;
+      padding: 1rem 1.2rem;
       z-index: 2;
       pointer-events: none;
     }
-    .video-featured-client {
+    .video-cell-client {
       font-family: var(--font-display);
-      font-size: 0.75rem;
+      font-size: 0.65rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--green);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.2rem;
     }
-    .video-featured-title {
+    .video-cell-title {
       font-family: var(--font-display);
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.25;
-    }
-
-    /* Thumbnail strip below featured video */
-    .video-thumbs {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 0.75rem;
-      overflow-x: auto;
-      padding-bottom: 0.5rem;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255,255,255,0.2) transparent;
-    }
-    .video-thumbs::-webkit-scrollbar { height: 4px; }
-    .video-thumbs::-webkit-scrollbar-track { background: transparent; }
-    .video-thumbs::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
-
-    .video-thumb {
-      flex: 0 0 auto;
-      width: 140px;
-      aspect-ratio: 16/9;
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      cursor: pointer;
-      position: relative;
-      background: #222;
-      border: 2px solid transparent;
-      transition: border-color 0.3s, transform 0.2s;
-    }
-    .video-thumb:hover,
-    .video-thumb.active {
-      border-color: var(--green);
-      transform: scale(1.04);
-    }
-    .video-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: opacity 0.3s;
-    }
-    .video-thumb-label {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 0.3rem 0.5rem;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-      font-family: var(--font-display);
-      font-size: 0.6rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      letter-spacing: 0.04em;
-      color: rgba(255,255,255,0.9);
-      text-transform: uppercase;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      color: var(--white);
+      line-height: 1.3;
     }
 
     .work-cta {
@@ -842,74 +693,61 @@
     .work-cta-vimeo svg { width: 16px; height: 16px; }
 
     /* =====================================================
-       COMPANY
+       COMPANY — card-style (no table)
     ===================================================== */
     .company-wrap {
-      background: rgba(247,248,246,0.8);
+      background: rgba(247,248,246,0.75);
     }
 
-    .company-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 6rem;
-      align-items: start;
+    .company-content {
       margin-top: 3rem;
+      max-width: 720px;
     }
-
     .company-intro {
       font-size: 0.95rem;
       color: var(--ink-light);
-      line-height: 1.8;
-      margin-top: 1rem;
-      max-width: 360px;
+      line-height: 1.85;
     }
-
-    .company-table-wrap {
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      background: var(--white);
+    .company-details {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
     }
-    .company-row {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      border-bottom: 1px solid var(--border);
+    .company-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
     }
-    .company-row:last-child { border-bottom: none; }
-    .company-key,
-    .company-val {
-      padding: 1.1rem 1.5rem;
-      font-size: 0.9rem;
-    }
-    .company-key {
+    .company-detail-label {
       font-family: var(--font-display);
-      font-weight: 500;
-      font-size: 0.78rem;
-      letter-spacing: 0.04em;
-      color: var(--ink-faint);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      background: var(--surface);
-      display: flex;
-      align-items: center;
-    }
-    .company-val {
-      color: var(--ink-mid);
-      display: flex;
-      align-items: center;
-    }
-    .company-val .ja {
-      font-size: 0.8rem;
       color: var(--ink-faint);
-      margin-left: 0.5rem;
     }
-
-    /* Security policy styles moved to security.html */
+    .company-detail-value {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .company-detail-value .ja {
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: var(--ink-light);
+      margin-left: 0.4rem;
+    }
 
     /* =====================================================
-       FOOTER — Light
+       FOOTER
     ===================================================== */
     .site-footer {
-      background: var(--surface);
+      position: relative;
+      z-index: 1;
+      background: rgba(247,248,246,0.9);
       color: var(--ink-light);
       padding: 3rem;
       border-top: 1px solid var(--border);
@@ -994,31 +832,24 @@
     ===================================================== */
     @media (max-width: 900px) {
       .site-header { padding: 1rem 1.5rem; }
+      .logo-wrap img { height: 44px; }
       .site-nav { display: none; }
       .hamburger { display: flex; }
 
-      .about-layout { grid-template-columns: 1fr; gap: 3rem; }
-      .about-body { max-width: 100%; }
+      .philosophy-grid { grid-template-columns: 1fr; }
 
       .services-grid { grid-template-columns: 1fr; }
       .services-header { flex-direction: column; align-items: flex-start; }
-      .video-thumb { width: 110px; }
 
-      .company-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-      .company-intro { max-width: 100%; }
+      .video-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+
+      .company-details { flex-direction: column; gap: 1.5rem; }
     }
 
     @media (max-width: 600px) {
       .section-wrap { padding: 5rem 1.5rem; }
       .hero { padding: 7rem 1.5rem 5rem; }
-      .hero-title { font-size: clamp(2.4rem, 11vw, 4rem); }
-
-      .about-stat-row { gap: 1.8rem; }
-      .stat-number { font-size: 2rem; }
-
-      .company-row { grid-template-columns: 1fr; }
-      .company-key { border-bottom: none; padding-bottom: 0.4rem; }
-      .company-val { padding-top: 0.3rem; }
+      .hero-title { font-size: clamp(2.4rem, 11vw, 4rem); white-space: normal; }
 
       .footer-inner { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
       .footer-links { flex-direction: column; gap: 0.8rem; }
@@ -1027,6 +858,8 @@
 
     /* Thin line accent divider */
     .divider-line {
+      position: relative;
+      z-index: 1;
       width: 100%;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--border), transparent);
@@ -1035,13 +868,16 @@
 </head>
 <body>
 
+  <!-- Full-page animated gradient (real element, not pseudo) -->
+  <div class="page-gradient"></div>
+
   <!-- ===================================================
        HEADER
   =================================================== -->
   <header class="site-header">
-    <div class="logo-wrap">
+    <a href="index.html" class="logo-wrap">
       <img src="images/logo_v2_clean.png" alt="AWESOME SAUCE Inc.">
-    </div>
+    </a>
     <nav class="site-nav">
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -1059,7 +895,7 @@
 
 
   <!-- ===================================================
-       HERO — Light + animated gradient
+       HERO
   =================================================== -->
   <section class="hero">
     <div class="hero-orb hero-orb-1"></div>
@@ -1067,14 +903,13 @@
     <div class="hero-orb hero-orb-3"></div>
 
     <div class="hero-inner">
-      <p class="hero-eyebrow en-only">Global Creative Agency &mdash; Shibuya, Tokyo</p>
-      <p class="hero-eyebrow ja-only">グローバル・クリエイティブエージェンシー &mdash; 渋谷, 東京</p>
+      <p class="hero-eyebrow">Global Creative Agency &mdash; Shibuya, Tokyo</p>
 
       <h1 class="hero-title en-only">
         <span class="accent">One Drop.</span>
       </h1>
       <h1 class="hero-title ja-only">
-        <span class="accent">一滴の、</span><br>雫。
+        <span class="accent">一滴の、シズク。</span>
       </h1>
 
       <p class="hero-sub en-only">
@@ -1099,100 +934,48 @@
 
 
   <!-- ===================================================
-       ABOUT
+       ABOUT (unified with Philosophy)
   =================================================== -->
   <section id="about" class="section-wrap about-wrap">
     <div class="section-inner">
-      <div class="about-layout">
 
-        <div class="about-left reveal">
-          <p class="section-label">About</p>
-          <h2 class="section-title en-only">We don't make ads.<br>We create context.</h2>
-          <h2 class="section-title ja-only">広告をつくるのではない。<br>文脈を創造する。</h2>
-
-          <p class="about-body en-only">
-            The same content, placed in a different context, transforms meaning entirely. AWESOME SAUCE is the agency that nurtures that context — the field where brands discover their authentic voice.
-          </p>
-          <p class="about-body en-only" style="margin-top:1rem;">
-            One drop of the right idea, like one drop of the right sauce, elevates everything it touches.
-          </p>
-
-          <p class="about-body ja-only">
-            同じコンテンツでも、文脈が変われば意味は根本から変容する。AWESOME SAUCEは、その文脈を育むエージェンシーです。ブランドが本来の声を見出す、目に見えない場を生み出します。
-          </p>
-          <p class="about-body ja-only" style="margin-top:1rem;">
-            適切なアイデアの一滴は、適切なソースの一滴のように、触れるものすべてを引き立てます。
-          </p>
-
-          <div class="about-stat-row">
-            <div class="stat">
-              <span class="stat-number">TOKYO</span>
-              <span class="stat-label">Home Base</span>
-            </div>
-            <div class="stat">
-              <span class="stat-number">&infin;</span>
-              <span class="stat-label">Ideas</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="about-right reveal">
-          <div class="about-card">
-            <p class="about-card-tag en-only">Philosophy</p>
-            <p class="about-card-tag ja-only">フィロソフィー</p>
-
-            <h3 class="about-card-title en-only">One Drop.</h3>
-            <h3 class="about-card-title ja-only">一滴の雫。</h3>
-
-            <p class="about-card-body en-only">
-              The drop in our logo represents our belief: one concentrated idea, perfectly placed, can transform everything. We distill — we never overwhelm.
-            </p>
-            <p class="about-card-body ja-only">
-              ロゴの雫は、私たちの信念そのもの。凝縮されたひとつのアイデアを、最適な場所に。蒸留する。圧倒するのではなく。
-            </p>
-
-            <div class="philosophy-principles">
-              <div class="philosophy-item">
-                <span class="philosophy-num">01</span>
-                <div>
-                  <p class="philosophy-title en-only">Context over Content</p>
-                  <p class="philosophy-title ja-only">コンテンツより、コンテクスト</p>
-                  <p class="philosophy-desc en-only">What you say matters less than where and how it lands.</p>
-                  <p class="philosophy-desc ja-only">何を言うかより、どこに届けるか。</p>
-                </div>
-              </div>
-              <div class="philosophy-item">
-                <span class="philosophy-num">02</span>
-                <div>
-                  <p class="philosophy-title en-only">Power, Not Force</p>
-                  <p class="philosophy-title ja-only">力ではなく、パワー</p>
-                  <p class="philosophy-desc en-only">True creative power is effortless — it uplifts, aligns, and inspires without coercion.</p>
-                  <p class="philosophy-desc ja-only">真のクリエイティブは、無理なく高め、調和し、自然と人の心を動かす。</p>
-                </div>
-              </div>
-              <div class="philosophy-item">
-                <span class="philosophy-num">03</span>
-                <div>
-                  <p class="philosophy-title en-only">Quality over Speed</p>
-                  <p class="philosophy-title ja-only">速さより、質</p>
-                  <p class="philosophy-desc en-only">Every project starts with finding that single, potent drop.</p>
-                  <p class="philosophy-desc ja-only">すべてのプロジェクトは、一滴を見つけることから。</p>
-                </div>
-              </div>
-            </div>
-
-            <span class="about-card-pill en-only">
-              <span class="about-card-pill-dot"></span>
-              Currently accepting new projects
-            </span>
-            <span class="about-card-pill ja-only">
-              <span class="about-card-pill-dot"></span>
-              新規プロジェクト受付中
-            </span>
-          </div>
-        </div>
-
+      <div class="reveal">
+        <p class="section-label">About</p>
+        <h2 class="section-title en-only">We don't make ads.<br>We create context.</h2>
+        <h2 class="section-title ja-only">広告をつくるのではない。<br>文脈を創造する。</h2>
       </div>
+
+      <p class="about-intro en-only reveal">
+        The same content, placed in a different context, transforms meaning entirely. AWESOME SAUCE nurtures that context — the field where brands discover their authentic voice. Based in Tokyo, one of the world's most dynamic creative cities, we bring global perspective with local intuition. One drop of the right idea, like one drop of the right sauce, elevates everything it touches.
+      </p>
+      <p class="about-intro ja-only reveal">
+        同じコンテンツでも、文脈が変われば意味は根本から変わる。AWESOME SAUCEは、その文脈を育むエージェンシーです。世界有数のクリエイティブ都市・東京を拠点に、グローバルな視点とローカルの直感で、ブランドが本来持っている力を引き出す。適切なソースの一滴が料理を変えるように、適切なアイデアの一滴が、すべてを変える。
+      </p>
+
+      <div class="philosophy-grid reveal">
+        <div class="philosophy-card">
+          <p class="philosophy-num">01</p>
+          <p class="philosophy-title en-only">Context over Content</p>
+          <p class="philosophy-title ja-only">コンテンツより、コンテクスト</p>
+          <p class="philosophy-desc en-only">What you say matters less than where and how it lands.</p>
+          <p class="philosophy-desc ja-only">何を言うかより、どこに届けるか。</p>
+        </div>
+        <div class="philosophy-card">
+          <p class="philosophy-num">02</p>
+          <p class="philosophy-title en-only">Power, Not Force</p>
+          <p class="philosophy-title ja-only">力ではなく、パワー</p>
+          <p class="philosophy-desc en-only">True creative power is effortless — it uplifts, aligns, and inspires naturally.</p>
+          <p class="philosophy-desc ja-only">真のクリエイティブは、無理なく高め、調和し、自然と人の心を動かす。</p>
+        </div>
+        <div class="philosophy-card">
+          <p class="philosophy-num">03</p>
+          <p class="philosophy-title en-only">Quality over Speed</p>
+          <p class="philosophy-title ja-only">速さより、質</p>
+          <p class="philosophy-desc en-only">Every project starts with finding that single, potent drop.</p>
+          <p class="philosophy-desc ja-only">すべてのプロジェクトは、一滴を見つけることから。</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1206,8 +989,8 @@
       <div class="services-header">
         <div class="reveal">
           <p class="section-label">Services</p>
-          <h2 class="section-title en-only">What we nurture<br>into being.</h2>
-          <h2 class="section-title ja-only">私たちが<br>育むもの。</h2>
+          <h2 class="section-title en-only">What We Do</h2>
+          <h2 class="section-title ja-only">私たちの仕事</h2>
         </div>
       </div>
 
@@ -1280,22 +1063,19 @@
   <div class="divider-line"></div>
 
   <!-- ===================================================
-       WORK — Autoplay video showcase
+       WORK — 3 random static videos
   =================================================== -->
   <section id="work" class="section-wrap work-wrap">
     <div class="section-inner">
       <div class="work-header reveal">
         <p class="section-label">Work</p>
-        <h2 class="section-title en-only">Our work speaks<br>for itself.</h2>
-        <h2 class="section-title ja-only">作品が、<br>語る。</h2>
+        <h2 class="section-title en-only">Selected Work</h2>
+        <h2 class="section-title ja-only">実績</h2>
       </div>
     </div>
-    <div class="video-featured-outer">
-      <div class="video-featured" id="video-featured">
-        <!-- Single large featured video, loaded by JS -->
-      </div>
-      <div class="video-thumbs" id="video-thumbs">
-        <!-- Thumbnail strip, built by JS -->
+    <div class="video-grid-outer">
+      <div class="video-grid" id="video-grid">
+        <!-- 3 random videos loaded by JS -->
       </div>
     </div>
     <div class="section-inner">
@@ -1314,49 +1094,43 @@
   <div class="divider-line"></div>
 
   <!-- ===================================================
-       COMPANY
+       COMPANY — card style
   =================================================== -->
   <section id="company" class="section-wrap company-wrap">
     <div class="section-inner">
       <p class="section-label reveal">Company</p>
-      <h2 class="section-title reveal en-only">The people &amp;<br>the principles.</h2>
+      <h2 class="section-title reveal en-only">Company</h2>
       <h2 class="section-title reveal ja-only">会社概要</h2>
 
-      <div class="company-layout">
+      <div class="company-content reveal">
+        <p class="company-intro en-only">
+          AWESOME SAUCE Inc. is based in Shibuya, Tokyo — one of the world's most vibrant creative districts. We flow with the agility of a boutique and the vision of a global creative studio.
+        </p>
+        <p class="company-intro ja-only">
+          AWESOME SAUCE Inc.は、世界で最も活気あるクリエイティブ地区のひとつ、東京・渋谷に拠点を置いています。ブティックの機動力とグローバルスタジオのビジョンを併せ持ちます。
+        </p>
 
-        <div class="company-left reveal">
-          <p class="company-intro en-only">
-            AWESOME SAUCE Inc. is based in Shibuya, Tokyo — one of the world's most vibrant creative districts. We flow with the agility of a boutique and the vision of a global creative studio.
-          </p>
-          <p class="company-intro ja-only">
-            AWESOME SAUCE Inc.は、世界で最も活気あるクリエイティブ地区のひとつ、東京・渋谷に拠点を置いています。ブティックの機動力とグローバルスタジオのビジョンを併せ持ちます。
-          </p>
-        </div>
-
-        <div class="company-right reveal">
-          <div class="company-table-wrap">
-            <div class="company-row">
-              <div class="company-key">Company</div>
-              <div class="company-val">AWESOME SAUCE Inc.</div>
-            </div>
-            <div class="company-row">
-              <div class="company-key">Founder</div>
-              <div class="company-val">Aoi Tairako <span class="ja">平子葵</span></div>
-            </div>
-            <div class="company-row">
-              <div class="company-key">Location</div>
-              <div class="company-val">Shibuya, Tokyo</div>
-            </div>
+        <div class="company-details">
+          <div class="company-detail">
+            <span class="company-detail-label">Company</span>
+            <span class="company-detail-value">AWESOME SAUCE Inc.</span>
+          </div>
+          <div class="company-detail">
+            <span class="company-detail-label">Founder</span>
+            <span class="company-detail-value">Aoi Tairako<span class="ja">平子葵</span></span>
+          </div>
+          <div class="company-detail">
+            <span class="company-detail-label">Location</span>
+            <span class="company-detail-value">Shibuya, Tokyo</span>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
 
   <!-- ===================================================
-       FOOTER — Light
+       FOOTER
   =================================================== -->
   <footer class="site-footer">
     <div class="footer-inner">
@@ -1387,7 +1161,7 @@
   </footer>
 
   <!-- ===================================================
-       LANGUAGE TOGGLE SCRIPT
+       SCRIPTS
   =================================================== -->
   <script>
     // Language toggle
@@ -1423,7 +1197,6 @@
         nav.style.borderBottom = open ? '' : '1px solid rgba(0,0,0,0.06)';
         nav.style.zIndex = open ? '' : '99';
       });
-      // Close menu on link click
       nav.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', () => {
           if (window.innerWidth <= 900) {
@@ -1434,7 +1207,7 @@
       });
     })();
 
-    // Featured video showcase — single large player + thumbnail strip
+    // 3 random static videos (no cycling)
     (function() {
       const videos = [
         { id: '297846874', client: 'NITORI', title: 'Creation!' },
@@ -1459,78 +1232,25 @@
         { id: '460134767', client: 'Japan Gov.', title: 'Resilient Japan — Niseko' }
       ];
 
-      const featured = document.getElementById('video-featured');
-      const thumbsContainer = document.getElementById('video-thumbs');
-      if (!featured || !thumbsContainer) return;
+      const container = document.getElementById('video-grid');
+      if (!container) return;
 
-      let currentIndex = 0;
-      let autoTimer = null;
+      // Pick 3 random videos
+      const shuffled = [...videos].sort(() => Math.random() - 0.5);
+      const picked = shuffled.slice(0, 3);
 
-      // Vimeo thumbnail URL (from their oEmbed / simple pattern)
-      function thumbUrl(id) {
-        return `https://vumbnail.com/${id}.jpg`;
-      }
-
-      function loadFeatured(index) {
-        const v = videos[index];
-        const existingIframe = featured.querySelector('iframe');
-
-        if (existingIframe) {
-          existingIframe.classList.add('fade-out');
-          setTimeout(() => {
-            existingIframe.src = `https://player.vimeo.com/video/${v.id}?background=1&autoplay=1&muted=1&loop=1&quality=auto`;
-            featured.querySelector('.video-featured-client').textContent = v.client;
-            featured.querySelector('.video-featured-title').textContent = v.title;
-            setTimeout(() => existingIframe.classList.remove('fade-out'), 400);
-          }, 600);
-        } else {
-          featured.innerHTML = `
-            <iframe src="https://player.vimeo.com/video/${v.id}?background=1&autoplay=1&muted=1&loop=1&quality=auto" allow="autoplay"></iframe>
-            <div class="video-featured-overlay"></div>
-            <div class="video-featured-info">
-              <p class="video-featured-client">${v.client}</p>
-              <p class="video-featured-title">${v.title}</p>
-            </div>`;
-        }
-
-        // Update active thumb
-        thumbsContainer.querySelectorAll('.video-thumb').forEach((t, i) => {
-          t.classList.toggle('active', i === index);
-        });
-        currentIndex = index;
-      }
-
-      // Build thumbnail strip
-      videos.forEach((v, i) => {
-        const thumb = document.createElement('div');
-        thumb.className = 'video-thumb' + (i === 0 ? ' active' : '');
-        thumb.innerHTML = `
-          <img src="${thumbUrl(v.id)}" alt="${v.title}" loading="lazy">
-          <span class="video-thumb-label">${v.client}</span>`;
-        thumb.addEventListener('click', () => {
-          loadFeatured(i);
-          resetAutoPlay();
-        });
-        thumbsContainer.appendChild(thumb);
+      picked.forEach(v => {
+        const cell = document.createElement('div');
+        cell.className = 'video-cell';
+        cell.innerHTML = `
+          <iframe src="https://player.vimeo.com/video/${v.id}?background=1&autoplay=1&muted=1&loop=1&quality=auto" allow="autoplay" loading="lazy"></iframe>
+          <div class="video-cell-overlay"></div>
+          <div class="video-cell-info">
+            <p class="video-cell-client">${v.client}</p>
+            <p class="video-cell-title">${v.title}</p>
+          </div>`;
+        container.appendChild(cell);
       });
-
-      // Load first video
-      loadFeatured(0);
-
-      // Auto-advance every 8 seconds
-      function autoAdvance() {
-        autoTimer = setInterval(() => {
-          const next = (currentIndex + 1) % videos.length;
-          loadFeatured(next);
-        }, 8000);
-      }
-
-      function resetAutoPlay() {
-        clearInterval(autoTimer);
-        autoAdvance();
-      }
-
-      autoAdvance();
     })();
   </script>
 
