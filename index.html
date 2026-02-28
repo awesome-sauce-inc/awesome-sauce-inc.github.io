@@ -1288,7 +1288,7 @@
       });
     })();
 
-    // 1 random background video (muted loop)
+    // 1 random background video (muted loop) — lazy loaded via IntersectionObserver
     (function() {
       const videoIds = [
         '297846874', '274288506', '225748921', '274288613', '274288583',
@@ -1300,12 +1300,17 @@
       const container = document.getElementById('work-bg-video');
       if (!container) return;
 
-      const picked = videoIds[Math.floor(Math.random() * videoIds.length)];
-      const iframe = document.createElement('iframe');
-      iframe.src = `https://player.vimeo.com/video/${picked}?background=1&autoplay=1&muted=1&loop=1&quality=auto`;
-      iframe.allow = 'autoplay';
-      iframe.loading = 'lazy';
-      container.appendChild(iframe);
+      const observer = new IntersectionObserver(function(entries) {
+        if (!entries[0].isIntersecting) return;
+        observer.disconnect();
+        const picked = videoIds[Math.floor(Math.random() * videoIds.length)];
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://player.vimeo.com/video/${picked}?background=1&autoplay=1&muted=1&loop=1&quality=auto`;
+        iframe.allow = 'autoplay';
+        container.appendChild(iframe);
+      }, { rootMargin: '300px' });
+
+      observer.observe(container);
     })();
 
     // Email obfuscation (anti-spam)
