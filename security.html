@@ -245,6 +245,49 @@
       color: var(--ink-mid);
     }
 
+    /* Security Action Badge */
+    .security-action-badge {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      padding: 1.5rem 2rem;
+      background: var(--blue-light);
+      border: 1px solid rgba(26, 150, 213, 0.2);
+      border-radius: var(--radius-md);
+    }
+    .security-action-badge img {
+      width: 100px;
+      height: auto;
+      flex-shrink: 0;
+    }
+    .security-action-badge-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .security-action-badge-title {
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .security-action-badge-id {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      color: var(--ink-light);
+      letter-spacing: 0.04em;
+    }
+    @media (max-width: 600px) {
+      .security-action-badge {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 1.2rem 1rem;
+      }
+      .security-action-badge img { width: 80px; }
+    }
+
     /* Footer */
     .site-footer {
       background: var(--surface);
@@ -380,6 +423,16 @@
             <p class="policy-item-body en-only">In the event of any legal violation, contractual breach, or security incident, we respond swiftly and appropriately, and take measures to prevent recurrence.</p>
             <p class="policy-item-body ja-only">当社は、情報セキュリティに関わる法令違反、契約違反及び事故が発生した場合には適切に対処し、再発防止に努めます。</p>
           </div>
+        </div>
+      </div>
+
+      <div class="security-action-badge">
+        <img src="images/ipa_security_action_futatsuboshi.png" alt="SECURITY ACTION Two-Star Declaration">
+        <div class="security-action-badge-text">
+          <p class="security-action-badge-title en-only">IPA SECURITY ACTION — Two-Star Declaration</p>
+          <p class="security-action-badge-title ja-only">IPA SECURITY ACTION — 二つ星宣言</p>
+          <p class="security-action-badge-id en-only">Self-Declaration ID: 41100378333</p>
+          <p class="security-action-badge-id ja-only">自己宣言ID: 41100378333</p>
         </div>
       </div>
 
